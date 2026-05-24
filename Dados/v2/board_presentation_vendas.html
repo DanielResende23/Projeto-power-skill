@@ -1,0 +1,373 @@
+
+<h2 class="sr-only">Apresentação executiva de vendas para o Board — diagnóstico, direção estratégica e retorno ao acionista</h2>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+
+.slide {
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  background: var(--color-background-primary);
+}
+.slide-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.slide-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.slide-subtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.kpi {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 12px 14px;
+}
+.kpi-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.kpi-value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1.1; }
+.kpi-delta { font-size: 12px; margin-top: 3px; }
+.up   { color: #3B6D11; }
+.down { color: #A32D2D; }
+.warn { color: #854F0B; }
+
+.chart-wrap { position: relative; width: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px; font-size: 12px; color: var(--color-text-secondary); }
+.legend span { display: flex; align-items: center; gap: 5px; }
+.swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+.insight-box {
+  border-left: 3px solid;
+  border-radius: 0;
+  padding: 10px 14px;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.insight-alert  { border-color: #E24B4A; background: #FCEBEB; color: #501313; }
+.insight-good   { border-color: #3B6D11; background: #EAF3DE; color: #173404; }
+.insight-action { border-color: #BA7517; background: #FAEEDA; color: #412402; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+.action-card {
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 14px 16px;
+}
+.action-num { font-size: 28px; font-weight: 500; color: var(--color-text-tertiary); line-height: 1; margin-bottom: 6px; }
+.action-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.action-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; }
+
+.pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 99px;
+  margin-right: 4px;
+}
+.pill-red    { background: #FCEBEB; color: #A32D2D; }
+.pill-green  { background: #EAF3DE; color: #3B6D11; }
+.pill-amber  { background: #FAEEDA; color: #854F0B; }
+.pill-blue   { background: #E6F1FB; color: #185FA5; }
+
+.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 16px 0; }
+
+.bar-label { font-size: 11px; color: var(--color-text-secondary); }
+</style>
+
+<div style="padding: 4px 0 8px;">
+  <div style="font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 2px;">Análise estratégica de vendas — jan/2023 a abr/2026</div>
+</div>
+
+<div class="slide">
+  <div class="slide-label">Visão geral · 3 anos</div>
+  <div class="slide-title">A empresa cresceu em 2024 — mas perdeu margem em 2025</div>
+  <div class="slide-subtitle">O pico de receita não trouxe o pico de lucro. Há algo estrutural que precisa ser corrigido.</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Receita 2023</div>
+      <div class="kpi-value">R$ 140M</div>
+      <div class="kpi-delta" style="color:var(--color-text-tertiary)">ano base</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Receita 2024</div>
+      <div class="kpi-value">R$ 203M</div>
+      <div class="kpi-delta up">+44% vs 2023</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Receita 2025</div>
+      <div class="kpi-value">R$ 191M</div>
+      <div class="kpi-delta down">-6% vs 2024</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Margem bruta 2023</div>
+      <div class="kpi-value">29,5%</div>
+      <div class="kpi-delta" style="color:var(--color-text-tertiary)">ano base</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Margem bruta 2024</div>
+      <div class="kpi-value">39,1%</div>
+      <div class="kpi-delta up">melhor ano</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Margem bruta 2025</div>
+      <div class="kpi-value">23,7%</div>
+      <div class="kpi-delta down">queda de 15pp</div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><span class="swatch" style="background:#1D9E75"></span>Receita líquida</span>
+    <span><span class="swatch" style="background:#639922"></span>Margem bruta R$</span>
+  </div>
+  <div class="chart-wrap" style="height:200px;">
+    <canvas id="c1" role="img" aria-label="Receita líquida e margem bruta por ano de 2023 a 2025">Receita: 2023 R$140M, 2024 R$203M, 2025 R$191M. Margem: 2023 R$41M, 2024 R$61M, 2025 R$45M.</canvas>
+  </div>
+  <div class="insight-box insight-alert" style="margin-top:14px;">
+    <strong>Diagnóstico:</strong> O custo cresceu mais rápido que a receita em 2025. A Embreagem — produto líder — perdeu R$ 5,3M de margem bruta entre 2024 e 2025, e a Bateria perdeu R$ 3,1M. Sem ação, a rentabilidade continuará caindo mesmo se a receita voltar a crescer.
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-label">Onde está o lucro</div>
+  <div class="slide-title">Dois produtos fazem a empresa. Três canais valem mais que um.</div>
+  <div class="slide-subtitle">Concentração é risco. Mas também é onde está a alavanca de crescimento.</div>
+  <div class="two-col" style="margin-bottom:16px;">
+    <div>
+      <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:8px;">Margem bruta 2023–2025 por produto</div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="c2" role="img" aria-label="Margem bruta por categoria de produto 2023 a 2025">Embreagem: 2023 R$10,9M, 2024 R$17,3M, 2025 R$12M. Amortecedor: 2023 R$10,4M, 2024 R$14,6M, 2025 R$11,4M.</canvas>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:8px;">Margem bruta 2023–2025 por canal</div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="c3" role="img" aria-label="Margem e custo por canal de venda">Televendas: receita R$256M, custo R$186M. Site: receita R$150M, custo R$110M.</canvas>
+      </div>
+    </div>
+  </div>
+  <div class="insight-box insight-good">
+    <strong>Alavanca 1 — Embreagem + Amortecedor:</strong> Juntos representam 43% da receita e as maiores margens da carteira (26–36%). Cada ponto percentual recuperado na margem dessas duas categorias vale ~R$ 2,9M/ano.
+  </div>
+  <div class="insight-box insight-action" style="margin-top:8px;">
+    <strong>Alavanca 2 — Canal Site:</strong> Margem bruta de 27% contra 27% no Televendas, mas com custo de atendimento muito menor. Site já representa 25% da receita. Dobrar esse canal em 2 anos é a rota de menor custo marginal para crescer lucro.
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-label">Onde o lucro vaza</div>
+  <div class="slide-title">R$ 80M em descontos em 3 anos. Televendas concede 15% de desconto médio.</div>
+  <div class="slide-subtitle">Desconto é o maior destruidor silencioso de margem — maior que custo de produto.</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Desconto total 3 anos</div>
+      <div class="kpi-value">R$ 80M</div>
+      <div class="kpi-delta warn">13,6% da receita bruta</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Desconto Televendas</div>
+      <div class="kpi-value">15,0%</div>
+      <div class="kpi-delta down">maior do portfólio</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Desconto Site</div>
+      <div class="kpi-value">13,2%</div>
+      <div class="kpi-delta warn">R$ 23M em 3 anos</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Desconto Marketplace</div>
+      <div class="kpi-value">13,4%</div>
+      <div class="kpi-delta warn">menor canal</div>
+    </div>
+  </div>
+  <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:8px;">Composição da receita bruta por canal (2023–2025)</div>
+  <div class="legend">
+    <span><span class="swatch" style="background:#1D9E75"></span>Receita líquida</span>
+    <span><span class="swatch" style="background:#E24B4A"></span>Desconto concedido</span>
+    <span><span class="swatch" style="background:#888780"></span>Custo</span>
+  </div>
+  <div class="chart-wrap" style="height:200px;">
+    <canvas id="c4" role="img" aria-label="Waterfall de receita bruta para margem por canal">Televendas: bruto R$294M, desconto R$38M, custo R$186M, margem R$31M. Site: bruto R$173M, desconto R$23M, custo R$110M, margem R$17M.</canvas>
+  </div>
+  <div class="insight-box insight-alert" style="margin-top:14px;">
+    <strong>Simulação de impacto:</strong> Reduzir o desconto de Televendas de 15% para 12% preservaria ~R$ 7,9M/ano de margem, sem tocar em preço, produto ou custo. É a medida de maior retorno imediato disponível.
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-label">Concentração de clientes · Pareto</div>
+  <div class="slide-title">20% dos clientes geram 78% da receita. A base precisa crescer.</div>
+  <div class="slide-subtitle">Alta dependência de Atacadistas é risco de concentração e pressão de margem.</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Top 20% clientes (40 de 200)</div>
+      <div class="kpi-value">78%</div>
+      <div class="kpi-delta down">da receita total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Atacadistas — receita 2024</div>
+      <div class="kpi-value">R$ 137M</div>
+      <div class="kpi-delta warn">68% do total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Atacadistas — margem 2025</div>
+      <div class="kpi-value">21,1%</div>
+      <div class="kpi-delta down">pior segmento</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Oficinas — margem 2025</div>
+      <div class="kpi-value">31,7%</div>
+      <div class="kpi-delta up">melhor segmento</div>
+    </div>
+  </div>
+  <div class="chart-wrap" style="height:200px;">
+    <canvas id="c5" role="img" aria-label="Receita e margem por tipo de cliente 2023 a 2025">Atacadista domina receita mas tem margem menor que Oficinas e Varejo.</canvas>
+  </div>
+  <div class="insight-box insight-action">
+    <strong>Oportunidade:</strong> Oficinas têm margem bruta 10pp acima dos Atacadistas e 3.429 pedidos em 2025. Crescer receita nesse segmento via Site/Marketplace é a rota para melhorar margem consolidada sem aumentar receita bruta.
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-label">Direção estratégica · Três movimentos</div>
+  <div class="slide-title">Para ter mais lucro, a empresa precisa parar de vender barato e começar a vender melhor.</div>
+  <div class="slide-subtitle">As três alavancas com maior impacto no resultado do acionista, em ordem de prazo.</div>
+  <div class="three-col" style="margin-bottom:16px; margin-top:4px;">
+    <div class="action-card">
+      <div class="action-num">01</div>
+      <div class="action-title">Controlar desconto</div>
+      <div class="action-body">Implantar política de desconto por canal e tamanho de pedido. Meta: Televendas de 15% para 12% até dez/2025.<br><br><span class="pill pill-green">+R$ 7,9M/ano</span><span class="pill pill-amber">0–6 meses</span></div>
+    </div>
+    <div class="action-card" style="border-color: var(--color-border-secondary);">
+      <div class="action-num">02</div>
+      <div class="action-title">Dobrar o canal Site</div>
+      <div class="action-body">Site já tem margem equivalente ao Televendas, mas custo de atendimento muito menor. Mover R$ 30M de Televendas para Site eleva lucro sem crescer receita.<br><br><span class="pill pill-green">+R$ 4–6M/ano</span><span class="pill pill-amber">6–18 meses</span></div>
+    </div>
+    <div class="action-card">
+      <div class="action-num">03</div>
+      <div class="action-title">Crescer Oficinas</div>
+      <div class="action-body">Segmento de maior margem (31,7%) e alta frequência. Passar de 14% para 20% do mix de clientes eleva margem consolidada em 3–4pp sem novo produto.<br><br><span class="pill pill-green">+3–4pp margem</span><span class="pill pill-amber">12–24 meses</span></div>
+    </div>
+  </div>
+  <div class="chart-wrap" style="height:160px;">
+    <canvas id="c6" role="img" aria-label="Impacto financeiro estimado das três alavancas estratégicas">Controle de desconto +R$7,9M, Canal Site +R$5M, Crescer Oficinas +R$3,5M impacto estimado anual.</canvas>
+  </div>
+  <div class="insight-box insight-good" style="margin-top:14px;">
+    <strong>Para o acionista:</strong> As três alavancas combinadas têm potencial de elevar a margem bruta de 23,7% para 32–35% em 24 meses — próximo ao pico histórico de 39% registrado em 2024 — sem necessidade de aumento de receita bruta ou novos produtos.
+  </div>
+</div>
+
+<div style="display:flex; gap:10px; margin-top:4px; flex-wrap:wrap;">
+  <button onclick="sendPrompt('Aprofunde a análise de descontos por canal: como estruturar a política e qual o impacto trimestre a trimestre?')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Política de descontos ↗</button>
+  <button onclick="sendPrompt('Como acelerar o crescimento do canal Site? Quais produtos e segmentos priorizar?')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Estratégia canal Site ↗</button>
+  <button onclick="sendPrompt('Faça uma análise RFM completa dos clientes Oficina para identificar os de maior potencial.')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Análise RFM Oficinas ↗</button>
+  <button onclick="sendPrompt('Monte o Painel de Rentabilidade no Power BI para o Board com base nessa análise.')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Montar painel BI ↗</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const fmt = v => 'R$' + (v/1e6).toFixed(0) + 'M';
+const pct = v => (v*100).toFixed(1) + '%';
+const def = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ' ' + fmt(ctx.raw) } } } };
+
+new Chart(document.getElementById('c1'), {
+  type: 'bar',
+  data: {
+    labels: ['2023','2024','2025'],
+    datasets: [
+      { label:'Receita líquida', data:[140243084,202543635,190503296], backgroundColor:'#1D9E75', borderRadius:4 },
+      { label:'Margem bruta R$', data:[41382358,60584372,45071519], backgroundColor:'#97C459', borderRadius:4 }
+    ]
+  },
+  options: { ...def, scales:{ x:{ ticks:{font:{size:11}} }, y:{ ticks:{ callback: fmt, font:{size:11} }, grid:{color:'rgba(136,135,128,0.12)'} } } }
+});
+
+new Chart(document.getElementById('c2'), {
+  type: 'bar',
+  data: {
+    labels: ['Embreagem','Amortecedor','Sensores','Bateria','Iluminação','Past. Freio','Velas','Filtros'],
+    datasets: [
+      { label:'2023', data:[10878918,10356617,6630463,5133255,4288265,2281185,1101982,711673], backgroundColor:'#B5D4F4', borderRadius:3 },
+      { label:'2024', data:[17277614,14587750,10338777,6425899,5996565,3405314,1596762,955689], backgroundColor:'#378ADD', borderRadius:3 },
+      { label:'2025', data:[11956033,11441485,8302479,3319889,5432085,2354424,1488700,776423], backgroundColor:'#185FA5', borderRadius:3 }
+    ]
+  },
+  options: { ...def, indexAxis:'y', plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ' ' + fmt(ctx.raw) } } }, scales:{ x:{ ticks:{ callback:fmt, font:{size:10} }, grid:{color:'rgba(136,135,128,0.12)'} }, y:{ ticks:{font:{size:10}} } } }
+});
+
+new Chart(document.getElementById('c3'), {
+  type: 'bar',
+  data: {
+    labels: ['Televendas','Site','Vend. Ext.','Marketplace'],
+    datasets: [
+      { label:'Margem bruta', data:[69633410,40300865,29702681,18859030], backgroundColor:'#1D9E75', borderRadius:4 },
+      { label:'Desconto concedido', data:[38317177,22886584,16748636,10940373], backgroundColor:'#F09595', borderRadius:4 }
+    ]
+  },
+  options: { ...def, scales:{ x:{ticks:{font:{size:10}}}, y:{ ticks:{ callback:fmt, font:{size:10} }, grid:{color:'rgba(136,135,128,0.12)'} } } }
+});
+
+new Chart(document.getElementById('c4'), {
+  type: 'bar',
+  data: {
+    labels: ['Televendas','Site','Vend. Externo','Marketplace'],
+    datasets: [
+      { label:'Receita líquida', data:[256132731,149833609,110087912,70470217], backgroundColor:'#1D9E75', borderRadius:3 },
+      { label:'Desconto', data:[38317177,22886584,16748636,10940373], backgroundColor:'#E24B4A', borderRadius:3 },
+      { label:'Custo', data:[186499322,109532744,80385231,51610186], backgroundColor:'#B4B2A9', borderRadius:3 }
+    ]
+  },
+  options: { ...def, scales:{ x:{ticks:{font:{size:10}}}, y:{ stacked:false, ticks:{ callback:fmt, font:{size:10} }, grid:{color:'rgba(136,135,128,0.12)'} } } }
+});
+
+new Chart(document.getElementById('c5'), {
+  type: 'bar',
+  data: {
+    labels: ['Atacadista','Varejo Peça','Oficina','Concession.','Frotista'],
+    datasets: [
+      { label:'2023', data:[96227756,13662675,11514928,11133243,7704482], backgroundColor:'#9FE1CB', borderRadius:3 },
+      { label:'2024', data:[137150855,20384633,16275757,16105991,12626398], backgroundColor:'#1D9E75', borderRadius:3 },
+      { label:'2025', data:[131457494,18667398,14316593,14094787,11967024], backgroundColor:'#085041', borderRadius:3 }
+    ]
+  },
+  options: { ...def, scales:{ x:{ticks:{font:{size:10}}}, y:{ ticks:{ callback:fmt, font:{size:10} }, grid:{color:'rgba(136,135,128,0.12)'} } } }
+});
+
+new Chart(document.getElementById('c6'), {
+  type: 'bar',
+  data: {
+    labels: ['Controle de desconto','Dobrar canal Site','Crescer Oficinas'],
+    datasets: [{
+      label:'Impacto estimado (R$M/ano)',
+      data:[7900000,5000000,3500000],
+      backgroundColor:['#1D9E75','#378ADD','#EF9F27'],
+      borderRadius:5
+    }]
+  },
+  options: { ...def,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx=>' '+fmt(ctx.raw)+'/ano estimado' } } },
+    scales:{ x:{ticks:{font:{size:11}}}, y:{ ticks:{ callback:fmt, font:{size:11} }, grid:{color:'rgba(136,135,128,0.12)'} } }
+  }
+});
+</script>

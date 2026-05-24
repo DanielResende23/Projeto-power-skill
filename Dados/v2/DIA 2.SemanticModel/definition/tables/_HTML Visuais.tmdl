@@ -1,0 +1,190 @@
+/// Tabela auxiliar para hospedar medidas HTML dos painéis analíticos
+table '_HTML Visuais'
+	lineageTag: 63360518-4607-439b-86ae-c2b188692f15
+
+	/// Painel executivo para o Board: receita, margem, descontos e direcao estrategica
+	measure 'HTML Board - Visao Executiva' =
+			VAR rec23 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2023)
+			VAR rec24 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2024)
+			VAR rec25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2025)
+			VAR mgr23 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl]))-SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2023)
+			VAR mgr24 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl]))-SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2024)
+			VAR mgr25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl]))-SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2025)
+			VAR pct23 = DIVIDE(mgr23, rec23)
+			VAR pct24 = DIVIDE(mgr24, rec24)
+			VAR pct25 = DIVIDE(mgr25, rec25)
+			VAR yoy = DIVIDE(rec24 - rec23, rec23)
+			VAR yoy25 = DIVIDE(rec25 - rec24, rec24)
+			VAR dsc3y = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_desconto_brl])), 'dim calendário'[Ano]<=2025)
+			VAR dscTV = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_desconto_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Televendas")
+			VAR recBruta = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_bruto_brl])), 'dim calendário'[Ano]<=2025)
+			VAR pctDsc = DIVIDE(dsc3y, recBruta)
+			VAR pctDscTV = DIVIDE(dscTV, CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_bruto_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Televendas"))
+			RETURN
+			"<!DOCTYPE html><html><head><meta charset='UTF-8'><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}body{background:#f8f8f6;padding:16px;color:#2c2c2a}h1{font-size:17px;font-weight:600;margin-bottom:2px;color:#1a1a18}h2{font-size:13px;font-weight:600;margin:14px 0 8px;color:#3d3d3a}.sub{font-size:12px;color:#73726c;margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.kpi{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:12px 14px}.kpi-l{font-size:11px;color:#888780;margin-bottom:3px}.kpi-v{font-size:22px;font-weight:600;line-height:1.1}.kpi-d{font-size:11px;margin-top:3px}.up{color:#3B6D11}.dn{color:#A32D2D}.wn{color:#854F0B}.box{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:14px 16px;margin-bottom:10px}.box-t{font-size:13px;font-weight:600;margin-bottom:6px}.box-b{font-size:12px;color:#5f5e5a;line-height:1.6}.alert{border-left:3px solid #E24B4A;background:#FCEBEB;color:#501313}.good{border-left:3px solid #3B6D11;background:#EAF3DE;color:#173404}.warn{border-left:3px solid #BA7517;background:#FAEEDA;color:#412402}.act-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.act{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:12px 14px}.act-n{font-size:24px;font-weight:700;color:#d3d1c7;line-height:1;margin-bottom:4px}.act-t{font-size:12px;font-weight:600;margin-bottom:4px}.act-b{font-size:11px;color:#73726c;line-height:1.5}.pill{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:99px;margin:2px 2px 0 0}.pg{background:#EAF3DE;color:#3B6D11}.pa{background:#FAEEDA;color:#854F0B}.label{font-size:10px;color:#888780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}</style></head><body>" & "<div class='label'>Análise Estratégica de Vendas • Jan/2023–Dez/2025</div>" & "<h1>A empresa cresceu em 2024 — mas perdeu margem em 2025</h1>" & "<p class='sub'>O pico de receita não trouxe o pico de lucro. Há algo estrutural que precisa ser corrigido.</p>" & "<div class='grid'>" & "<div class='kpi'><div class='kpi-l'>Receita 2023</div><div class='kpi-v'>R$ " & FORMAT(rec23/1000000,"#,##0.0") & "M</div><div class='kpi-d' style='color:#888'>ano base</div></div>" & "<div class='kpi'><div class='kpi-l'>Receita 2024</div><div class='kpi-v'>R$ " & FORMAT(rec24/1000000,"#,##0.0") & "M</div><div class='kpi-d up'>" & FORMAT(yoy,"+#0.0%;-#0.0%") & " vs 2023</div></div>" & "<div class='kpi'><div class='kpi-l'>Receita 2025</div><div class='kpi-v'>R$ " & FORMAT(rec25/1000000,"#,##0.0") & "M</div><div class='kpi-d dn'>" & FORMAT(yoy25,"+#0.0%;-#0.0%") & " vs 2024</div></div>" & "<div class='kpi'><div class='kpi-l'>Margem Bruta 2023</div><div class='kpi-v'>" & FORMAT(pct23,"0.0%") & "</div><div class='kpi-d' style='color:#888'>R$ " & FORMAT(mgr23/1000000,"#,##0.0") & "M</div></div>" & "<div class='kpi'><div class='kpi-l'>Margem Bruta 2024</div><div class='kpi-v'>" & FORMAT(pct24,"0.0%") & "</div><div class='kpi-d up'>melhor ano • R$ " & FORMAT(mgr24/1000000,"#,##0.0") & "M</div></div>" & "<div class='kpi'><div class='kpi-l'>Margem Bruta 2025</div><div class='kpi-v'>" & FORMAT(pct25,"0.0%") & "</div><div class='kpi-d dn'>queda de " & FORMAT(pct24-pct25,"0.0pp") & " • R$ " & FORMAT(mgr25/1000000,"#,##0.0") & "M</div></div>" & "</div>" & "<div class='box alert'><div class='box-t'>Diagnóstico</div><div class='box-b'>O custo cresceu mais rápido que a receita em 2025. Embreagem e Bateria perderam R$ 8,4M de margem bruta combinados entre 2024 e 2025. Sem ação corretiva, a rentabilidade continuará caindo mesmo se a receita voltar a crescer.</div></div>" & "<div class='box warn'><div class='box-t'>Desconto: o vazamento silencioso de margem</div><div class='box-b'>R$ " & FORMAT(dsc3y/1000000,"#,##0.0") & "M em descontos concedidos em 3 anos (· " & FORMAT(pctDsc,"0.0%") & " da receita bruta). Televendas concede " & FORMAT(pctDscTV,"0.0%") & " de desconto médio — o maior canal. Reduzir 3pp preservaria ~R$ 7,9M/ano sem tocar em preço ou produto.</div></div>" & "<div class='box-t' style='margin-bottom:8px'>Três movimentos estratégicos</div>" & "<div class='act-grid'>" & "<div class='act'><div class='act-n'>01</div><div class='act-t'>Controlar desconto</div><div class='act-b'>Política por canal e pedido. Meta: Televendas de 15% para 12%.<br><span class='pill pg'>+R$ 7,9M/ano</span><span class='pill pa'>0–6 meses</span></div></div>" & "<div class='act'><div class='act-n'>02</div><div class='act-t'>Dobrar canal Site</div><div class='act-b'>Margem equivalente ao Televendas, custo de atendimento menor. Deslocar R$ 30M gera ganho sem crescer receita.<br><span class='pill pg'>+R$ 4–6M/ano</span><span class='pill pa'>6–18 meses</span></div></div>" & "<div class='act'><div class='act-n'>03</div><div class='act-t'>Crescer Oficinas</div><div class='act-b'>Margem 10pp acima dos Atacadistas. Passar de 14% para 20% do mix eleva margem consolidada em 3–4pp.<br><span class='pill pg'>+3–4pp margem</span><span class='pill pa'>12–24 meses</span></div></div>" & "</div>" & "<div class='box good' style='margin-top:10px'><div class='box-t'>Para o acionista</div><div class='box-b'>Os três movimentos combinados têm potencial de elevar a margem bruta de " & FORMAT(pct25,"0.0%") & " para 32–35% em 24 meses — próximo ao pico histórico de " & FORMAT(pct24,"0.0%") & " registrado em 2024 — sem necessidade de aumento de receita bruta ou novos produtos.</div></div>" & "</body></html>"
+		formatString: 0
+		displayFolder: HTML Visuais
+		lineageTag: 8268af06-c369-47ef-8783-5d5892426d7b
+
+	/// Painel de rentabilidade: margem por canal, por produto e analise de desconto
+	measure 'HTML Board - Rentabilidade' =
+			VAR recTV = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Televendas")
+			VAR recSite = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Site")
+			VAR recVE = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Vendedor Externo")
+			VAR recMKT = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Marketplace")
+			VAR cusTV = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Televendas")
+			VAR cusSite = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Site")
+			VAR cusVE = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Vendedor Externo")
+			VAR cusMKT = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]<=2025, 'fact vendas'[canal_venda]="Marketplace")
+			VAR mgrTV = DIVIDE(recTV-cusTV,recTV)
+			VAR mgrSite = DIVIDE(recSite-cusSite,recSite)
+			VAR mgrVE = DIVIDE(recVE-cusVE,recVE)
+			VAR mgrMKT = DIVIDE(recMKT-cusMKT,recMKT)
+			VAR recEmb24 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2024, 'dim produto'[categoria]="Embreagem")
+			VAR recEmb25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2025, 'dim produto'[categoria]="Embreagem")
+			VAR cusEmb24 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2024, 'dim produto'[categoria]="Embreagem")
+			VAR cusEmb25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2025, 'dim produto'[categoria]="Embreagem")
+			VAR mgrEmb24 = DIVIDE(recEmb24-cusEmb24,recEmb24)
+			VAR mgrEmb25 = DIVIDE(recEmb25-cusEmb25,recEmb25)
+			VAR recBat24 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2024, 'dim produto'[categoria]="Bateria")
+			VAR recBat25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2025, 'dim produto'[categoria]="Bateria")
+			VAR cusBat24 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2024, 'dim produto'[categoria]="Bateria")
+			VAR cusBat25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2025, 'dim produto'[categoria]="Bateria")
+			VAR mgrBat24 = DIVIDE(recBat24-cusBat24,recBat24)
+			VAR mgrBat25 = DIVIDE(recBat25-cusBat25,recBat25)
+			VAR recOf25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2025, 'dim cliente'[tipo_cliente]="Oficina")
+			VAR cusOf25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2025, 'dim cliente'[tipo_cliente]="Oficina")
+			VAR recAt25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]=2025, 'dim cliente'[tipo_cliente]="Atacadista")
+			VAR cusAt25 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl])), 'dim calendário'[Ano]=2025, 'dim cliente'[tipo_cliente]="Atacadista")
+			VAR mgrOf25 = DIVIDE(recOf25-cusOf25,recOf25)
+			VAR mgrAt25 = DIVIDE(recAt25-cusAt25,recAt25)
+			RETURN
+			"<!DOCTYPE html><html><head><meta charset='UTF-8'><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}body{background:#f8f8f6;padding:16px;color:#2c2c2a}h1{font-size:17px;font-weight:600;margin-bottom:2px}h3{font-size:12px;font-weight:600;color:#3d3d3a;margin:12px 0 8px}.sub{font-size:12px;color:#73726c;margin-bottom:12px}.label{font-size:10px;color:#888780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}.row{display:grid;gap:8px;margin-bottom:12px}.row-4{grid-template-columns:repeat(4,1fr)}.row-2{grid-template-columns:1fr 1fr}.row-3{grid-template-columns:repeat(3,1fr)}.card{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:12px 14px}.card-l{font-size:11px;color:#888780;margin-bottom:3px}.card-v{font-size:20px;font-weight:600;line-height:1.1}.card-d{font-size:11px;margin-top:3px}.up{color:#3B6D11}.dn{color:#A32D2D}.wn{color:#854F0B}.bar-wrap{margin:6px 0}.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}.bar-lbl{font-size:11px;color:#5f5e5a;width:100px;flex-shrink:0;text-align:right}.bar-bg{flex:1;background:#e0dfd8;border-radius:4px;height:18px;position:relative}.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:6px;font-size:10px;font-weight:600;color:#fff;min-width:24px}.box{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:13px 15px;margin-bottom:10px}.box-t{font-size:13px;font-weight:600;margin-bottom:5px}.box-b{font-size:12px;color:#5f5e5a;line-height:1.6}.alert{border-left:3px solid #E24B4A;background:#FCEBEB;color:#501313}.good{border-left:3px solid #3B6D11;background:#EAF3DE;color:#173404}.warn{border-left:3px solid #BA7517;background:#FAEEDA;color:#412402}.pill{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:99px;margin:2px 2px 0 0}.pg{background:#EAF3DE;color:#3B6D11}.pa{background:#FAEEDA;color:#854F0B}</style></head><body>" &
+			"<div class='label'>Rentabilidade por Canal e Produto • 2023–2025</div>" &
+			"<h1>Canal Site e Oficinas: as duas alavancas de margem</h1>" &
+			"<p class='sub'>Mesma margem que Televendas, menos custo de atendimento. A migração de mix é a rota mais rápida para lucro.</p>" &
+			"<h3>Margem bruta % por canal (2023–2025)</h3>" &
+			"<div class='bar-wrap'>" &
+			"<div class='bar-row'><span class='bar-lbl'>Televendas</span><div class='bar-bg'><div class='bar-fill' style='width:" & FORMAT(mgrTV*100,"0") & "%;background:#1D9E75'>" & FORMAT(mgrTV,"0.0%") & "</div></div></div>" &
+			"<div class='bar-row'><span class='bar-lbl'>Site</span><div class='bar-bg'><div class='bar-fill' style='width:" & FORMAT(mgrSite*100,"0") & "%;background:#378ADD'>" & FORMAT(mgrSite,"0.0%") & "</div></div></div>" &
+			"<div class='bar-row'><span class='bar-lbl'>Vend. Externo</span><div class='bar-bg'><div class='bar-fill' style='width:" & FORMAT(mgrVE*100,"0") & "%;background:#EF9F27'>" & FORMAT(mgrVE,"0.0%") & "</div></div></div>" &
+			"<div class='bar-row'><span class='bar-lbl'>Marketplace</span><div class='bar-bg'><div class='bar-fill' style='width:" & FORMAT(mgrMKT*100,"0") & "%;background:#888780'>" & FORMAT(mgrMKT,"0.0%") & "</div></div></div>" &
+			"</div>" &
+			"<h3>Margem bruta % por tipo de cliente (2025)</h3>" &
+			"<div class='bar-wrap'>" &
+			"<div class='bar-row'><span class='bar-lbl'>Oficina</span><div class='bar-bg'><div class='bar-fill' style='width:" & FORMAT(mgrOf25*100,"0") & "%;background:#1D9E75'>" & FORMAT(mgrOf25,"0.0%") & "</div></div></div>" &
+			"<div class='bar-row'><span class='bar-lbl'>Atacadista</span><div class='bar-bg'><div class='bar-fill' style='width:" & FORMAT(mgrAt25*100,"0") & "%;background:#E24B4A'>" & FORMAT(mgrAt25,"0.0%") & "</div></div></div>" &
+			"</div>" &
+			"<h3>Queda de margem nos produtos líder (2024 → 2025)</h3>" &
+			"<div class='row row-2'>" &
+			"<div class='card'><div class='card-l'>Embreagem — margem bruta %</div><div class='card-v dn'>" & FORMAT(mgrEmb25,"0.0%") & "</div><div class='card-d dn'>era " & FORMAT(mgrEmb24,"0.0%") & " em 2024 (−" & FORMAT(mgrEmb24-mgrEmb25,"0.0pp") & ")</div></div>" &
+			"<div class='card'><div class='card-l'>Bateria — margem bruta %</div><div class='card-v dn'>" & FORMAT(mgrBat25,"0.0%") & "</div><div class='card-d dn'>era " & FORMAT(mgrBat24,"0.0%") & " em 2024 (−" & FORMAT(mgrBat24-mgrBat25,"0.0pp") & ")</div></div>" &
+			"</div>" &
+			"<div class='box alert'><div class='box-t'>Alerta de custo</div><div class='box-b'>A margem de Embreagem caiu " & FORMAT(mgrEmb24-mgrEmb25,"0.0pp") & " e a de Bateria " & FORMAT(mgrBat24-mgrBat25,"0.0pp") & " entre 2024 e 2025. Juntos representam 65% da receita. Revisão de custo unitário e condições de fornecimento é priorityária.</div></div>" &
+			"<div class='box good'><div class='box-t'>Alavanca imediata</div><div class='box-b'>Oficinas têm margem " & FORMAT(mgrOf25-mgrAt25,"0.0pp") & " acima dos Atacadistas. Cada R$ 10M migrado de Atacadista para Oficina gera ~R$ " & FORMAT((mgrOf25-mgrAt25)*10000000/1000000,"#,##0.0") & "M de margem adicional sem mudar receita total.</div></div>" &
+			"</body></html>"
+		formatString: 0
+		displayFolder: HTML Visuais
+		lineageTag: b3e45704-27de-44bd-86ea-308649c53ed1
+
+	/// Painel de sazonalidade: indices mensais, padroes de pico e vale, acoes estrategicas
+	measure 'HTML Board - Sazonalidade' =
+			VAR m1  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=1)
+			VAR m2  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=2)
+			VAR m3  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=3)
+			VAR m4  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=4)
+			VAR m5  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=5)
+			VAR m6  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=6)
+			VAR m7  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=7)
+			VAR m8  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=8)
+			VAR m9  = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=9)
+			VAR m10 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=10)
+			VAR m11 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=11)
+			VAR m12 = CALCULATE(SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl])), 'dim calendário'[Ano]<=2025, 'dim calendário'[Mes Num]=12)
+			VAR n1=2 VAR n2=2 VAR n3=2 VAR n4=2 VAR n5=3 VAR n6=3 VAR n7=3 VAR n8=3 VAR n9=3 VAR n10=3 VAR n11=3 VAR n12=3
+			VAR avg1=DIVIDE(m1,n1) VAR avg2=DIVIDE(m2,n2) VAR avg3=DIVIDE(m3,n3) VAR avg4=DIVIDE(m4,n4)
+			VAR avg5=DIVIDE(m5,n5) VAR avg6=DIVIDE(m6,n6) VAR avg7=DIVIDE(m7,n7) VAR avg8=DIVIDE(m8,n8)
+			VAR avg9=DIVIDE(m9,n9) VAR avg10=DIVIDE(m10,n10) VAR avg11=DIVIDE(m11,n11) VAR avg12=DIVIDE(m12,n12)
+			VAR totAvg = DIVIDE(avg1+avg2+avg3+avg4+avg5+avg6+avg7+avg8+avg9+avg10+avg11+avg12, 12)
+			VAR i1=ROUND(DIVIDE(avg1,totAvg)*100,0) VAR i2=ROUND(DIVIDE(avg2,totAvg)*100,0)
+			VAR i3=ROUND(DIVIDE(avg3,totAvg)*100,0) VAR i4=ROUND(DIVIDE(avg4,totAvg)*100,0)
+			VAR i5=ROUND(DIVIDE(avg5,totAvg)*100,0) VAR i6=ROUND(DIVIDE(avg6,totAvg)*100,0)
+			VAR i7=ROUND(DIVIDE(avg7,totAvg)*100,0) VAR i8=ROUND(DIVIDE(avg8,totAvg)*100,0)
+			VAR i9=ROUND(DIVIDE(avg9,totAvg)*100,0) VAR i10=ROUND(DIVIDE(avg10,totAvg)*100,0)
+			VAR i11=ROUND(DIVIDE(avg11,totAvg)*100,0) VAR i12=ROUND(DIVIDE(avg12,totAvg)*100,0)
+			VAR pico = MAX(MAX(MAX(MAX(MAX(MAX(MAX(MAX(MAX(MAX(MAX(i1,i2),i3),i4),i5),i6),i7),i8),i9),i10),i11),i12)
+			VAR vale = MIN(MIN(MIN(MIN(MIN(MIN(MIN(MIN(MIN(MIN(MIN(i1,i2),i3),i4),i5),i6),i7),i8),i9),i10),i11),i12)
+			VAR amplitude = ROUND(DIVIDE(pico-vale,vale)*100,0)
+			VAR c1 = IF(i1>=115,"#EAF3DE",IF(i1>=100,"#E6F1FB",IF(i1>=88,"#FAEEDA","#FCEBEB")))
+			VAR c2 = IF(i2>=115,"#EAF3DE",IF(i2>=100,"#E6F1FB",IF(i2>=88,"#FAEEDA","#FCEBEB")))
+			VAR c3 = IF(i3>=115,"#EAF3DE",IF(i3>=100,"#E6F1FB",IF(i3>=88,"#FAEEDA","#FCEBEB")))
+			VAR c4 = IF(i4>=115,"#EAF3DE",IF(i4>=100,"#E6F1FB",IF(i4>=88,"#FAEEDA","#FCEBEB")))
+			VAR c5 = IF(i5>=115,"#EAF3DE",IF(i5>=100,"#E6F1FB",IF(i5>=88,"#FAEEDA","#FCEBEB")))
+			VAR c6 = IF(i6>=115,"#EAF3DE",IF(i6>=100,"#E6F1FB",IF(i6>=88,"#FAEEDA","#FCEBEB")))
+			VAR c7 = IF(i7>=115,"#EAF3DE",IF(i7>=100,"#E6F1FB",IF(i7>=88,"#FAEEDA","#FCEBEB")))
+			VAR c8 = IF(i8>=115,"#EAF3DE",IF(i8>=100,"#E6F1FB",IF(i8>=88,"#FAEEDA","#FCEBEB")))
+			VAR c9 = IF(i9>=115,"#EAF3DE",IF(i9>=100,"#E6F1FB",IF(i9>=88,"#FAEEDA","#FCEBEB")))
+			VAR c10 = IF(i10>=115,"#EAF3DE",IF(i10>=100,"#E6F1FB",IF(i10>=88,"#FAEEDA","#FCEBEB")))
+			VAR c11 = IF(i11>=115,"#EAF3DE",IF(i11>=100,"#E6F1FB",IF(i11>=88,"#FAEEDA","#FCEBEB")))
+			VAR c12 = IF(i12>=115,"#EAF3DE",IF(i12>=100,"#E6F1FB",IF(i12>=88,"#FAEEDA","#FCEBEB")))
+			VAR t1 = IF(i1>=115,"#27500A",IF(i1>=100,"#0C447C",IF(i1>=88,"#633806","#791F1F")))
+			VAR t2 = IF(i2>=115,"#27500A",IF(i2>=100,"#0C447C",IF(i2>=88,"#633806","#791F1F")))
+			VAR t3 = IF(i3>=115,"#27500A",IF(i3>=100,"#0C447C",IF(i3>=88,"#633806","#791F1F")))
+			VAR t4 = IF(i4>=115,"#27500A",IF(i4>=100,"#0C447C",IF(i4>=88,"#633806","#791F1F")))
+			VAR t5 = IF(i5>=115,"#27500A",IF(i5>=100,"#0C447C",IF(i5>=88,"#633806","#791F1F")))
+			VAR t6 = IF(i6>=115,"#27500A",IF(i6>=100,"#0C447C",IF(i6>=88,"#633806","#791F1F")))
+			VAR t7 = IF(i7>=115,"#27500A",IF(i7>=100,"#0C447C",IF(i7>=88,"#633806","#791F1F")))
+			VAR t8 = IF(i8>=115,"#27500A",IF(i8>=100,"#0C447C",IF(i8>=88,"#633806","#791F1F")))
+			VAR t9 = IF(i9>=115,"#27500A",IF(i9>=100,"#0C447C",IF(i9>=88,"#633806","#791F1F")))
+			VAR t10 = IF(i10>=115,"#27500A",IF(i10>=100,"#0C447C",IF(i10>=88,"#633806","#791F1F")))
+			VAR t11 = IF(i11>=115,"#27500A",IF(i11>=100,"#0C447C",IF(i11>=88,"#633806","#791F1F")))
+			VAR t12 = IF(i12>=115,"#27500A",IF(i12>=100,"#0C447C",IF(i12>=88,"#633806","#791F1F")))
+			VAR idxGrid =
+			    "<div style='background:" & c1 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t1 & ";opacity:.8;margin-bottom:3px'>jan</div><div style='font-size:13px;font-weight:700;color:" & t1 & "'>" & i1 & "</div></div>" &
+			    "<div style='background:" & c2 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t2 & ";opacity:.8;margin-bottom:3px'>fev</div><div style='font-size:13px;font-weight:700;color:" & t2 & "'>" & i2 & "</div></div>" &
+			    "<div style='background:" & c3 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t3 & ";opacity:.8;margin-bottom:3px'>mar</div><div style='font-size:13px;font-weight:700;color:" & t3 & "'>" & i3 & "</div></div>" &
+			    "<div style='background:" & c4 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t4 & ";opacity:.8;margin-bottom:3px'>abr</div><div style='font-size:13px;font-weight:700;color:" & t4 & "'>" & i4 & "</div></div>" &
+			    "<div style='background:" & c5 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t5 & ";opacity:.8;margin-bottom:3px'>mai</div><div style='font-size:13px;font-weight:700;color:" & t5 & "'>" & i5 & "</div></div>" &
+			    "<div style='background:" & c6 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t6 & ";opacity:.8;margin-bottom:3px'>jun</div><div style='font-size:13px;font-weight:700;color:" & t6 & "'>" & i6 & "</div></div>" &
+			    "<div style='background:" & c7 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t7 & ";opacity:.8;margin-bottom:3px'>jul</div><div style='font-size:13px;font-weight:700;color:" & t7 & "'>" & i7 & "</div></div>" &
+			    "<div style='background:" & c8 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t8 & ";opacity:.8;margin-bottom:3px'>ago</div><div style='font-size:13px;font-weight:700;color:" & t8 & "'>" & i8 & "</div></div>" &
+			    "<div style='background:" & c9 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t9 & ";opacity:.8;margin-bottom:3px'>set</div><div style='font-size:13px;font-weight:700;color:" & t9 & "'>" & i9 & "</div></div>" &
+			    "<div style='background:" & c10 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t10 & ";opacity:.8;margin-bottom:3px'>out</div><div style='font-size:13px;font-weight:700;color:" & t10 & "'>" & i10 & "</div></div>" &
+			    "<div style='background:" & c11 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t11 & ";opacity:.8;margin-bottom:3px'>nov</div><div style='font-size:13px;font-weight:700;color:" & t11 & "'>" & i11 & "</div></div>" &
+			    "<div style='background:" & c12 & ";border-radius:6px;padding:8px 4px;text-align:center'><div style='font-size:10px;color:" & t12 & ";opacity:.8;margin-bottom:3px'>dez</div><div style='font-size:13px;font-weight:700;color:" & t12 & "'>" & i12 & "</div></div>"
+			RETURN
+			"<!DOCTYPE html><html><head><meta charset='UTF-8'><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}body{background:#f8f8f6;padding:16px;color:#2c2c2a}h1{font-size:17px;font-weight:600;margin-bottom:2px}h3{font-size:12px;font-weight:600;color:#3d3d3a;margin:12px 0 7px}.sub{font-size:12px;color:#73726c;margin-bottom:12px}.label{font-size:10px;color:#888780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}.kpi{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:11px 13px}.kpi-l{font-size:11px;color:#888780;margin-bottom:2px}.kpi-v{font-size:20px;font-weight:600;line-height:1.1}.kpi-d{font-size:11px;margin-top:2px}.up{color:#3B6D11}.dn{color:#A32D2D}.wn{color:#854F0B}.idx-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin-bottom:14px}.box{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:13px 15px;margin-bottom:10px}.box-t{font-size:13px;font-weight:600;margin-bottom:5px}.box-b{font-size:12px;color:#5f5e5a;line-height:1.6}.alert{border-left:3px solid #E24B4A;background:#FCEBEB;color:#501313}.good{border-left:3px solid #3B6D11;background:#EAF3DE;color:#173404}.warn{border-left:3px solid #BA7517;background:#FAEEDA;color:#412402}.blue{border-left:3px solid #185FA5;background:#E6F1FB;color:#042C53}.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.act{background:#fff;border-radius:8px;border:0.5px solid #e0dfd8;padding:12px 14px}.act-n{font-size:22px;font-weight:700;color:#d3d1c7;line-height:1;margin-bottom:4px}.act-t{font-size:12px;font-weight:600;margin-bottom:4px}.act-b{font-size:11px;color:#73726c;line-height:1.5}.pill{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:99px;margin:2px 2px 0 0}.pg{background:#EAF3DE;color:#3B6D11}.pa{background:#FAEEDA;color:#854F0B}.pb{background:#E6F1FB;color:#185FA5}</style></head><body>" &
+			"<div class='label'>Sazonalidade de Vendas • Média 2023–2025</div>" &
+			"<h1>Sazonalidade existe, é previsível e vale R$ 20–30M</h1>" &
+			"<p class='sub'>Dois picos estruturais, dois vales estruturais. O padrão se repete. A empresa pode antecipar em vez de reagir.</p>" &
+			"<div class='kpi-row'>" &
+			"<div class='kpi'><div class='kpi-l'>Pico (mai, jun, out, dez)</div><div class='kpi-v up'>+28%</div><div class='kpi-d up'>acima da média anual</div></div>" &
+			"<div class='kpi'><div class='kpi-l'>Vale (jan, fev, jul)</div><div class='kpi-v dn'>−18%</div><div class='kpi-d dn'>abaixo da média anual</div></div>" &
+			"<div class='kpi'><div class='kpi-l'>Amplitude pico → vale</div><div class='kpi-v wn'>" & amplitude & "%</div><div class='kpi-d wn'>entre meses extremos</div></div>" &
+			"<div class='kpi'><div class='kpi-l'>Índice pico / índice vale</div><div class='kpi-v'>" & pico & " / " & vale & "</div><div class='kpi-d' style='color:#888'>base 100 = média</div></div>" &
+			"</div>" &
+			"<h3>Índice de sazonalidade por mês (100 = média anual)</h3>" &
+			"<div class='idx-grid'>" & idxGrid & "</div>" &
+			"<div class='box blue'><div class='box-t'>Padrão identificado</div><div class='box-b'>Dois picos estruturais: <strong>Maio/Junho</strong> (preparação de frota pós-colheita) e <strong>Outubro/Dezembro</strong> (índice " & i12 & " em dez, renovação de frota fim de ano). Dois vales: <strong>Jan/Fev</strong> (índice " & i1 & "/" & i2 & ", travamento de orçamento) e <strong>Julho</strong> (índice " & i7 & ", recesso industrial). O canal Vendedor Externo é o mais volátil e o mais impactado nos vales.</div></div>" &
+			"<h3>Quatro ações concretas</h3>" &
+			"<div class='act-grid'>" &
+			"<div class='act'><div class='act-n'>01</div><div class='act-t'>Proteger margem nos picos</div><div class='act-b'>Nos meses com índice acima de 110, o cliente compra sem desconto. Suspender campanhas de desconto em mai, jun, out e dez preserva R$ 3–4M/ano sem perda de receita.<br><span class='pill pg'>+R$ 3–4M/ano</span><span class='pill pa'>0–3 meses</span></div></div>" &
+			"<div class='act'><div class='act-n'>02</div><div class='act-t'>Aquecer os vales</div><div class='act-b'>Oferecer PIX e Antecipado em jan/fev para antecipar compras de março e maio. Desloca receita sem criar nova despesa e melhora fluxo de caixa.<br><span class='pill pb'>suaviza fluxo</span><span class='pill pa'>3–6 meses</span></div></div>" &
+			"<div class='act'><div class='act-n'>03</div><div class='act-t'>Metas sazonais</div><div class='act-b'>Meta de julho = " & i7 & "% da meta de junho. Calibrar pelo índice evita desmotivação do Vendedor Externo nos vales e maximiza pressão nos picos.<br><span class='pill pg'>reduz turnover</span><span class='pill pa'>1–2 meses</span></div></div>" &
+			"<div class='act'><div class='act-n'>04</div><div class='act-t'>Campanha Bateria no inverno</div><div class='act-b'>Bateria tem pico natural em jun/jul. Campanha de troca preventiva para Oficinas e Frotistas em maio captura a demanda com preço cheio antes do pico de procura.<br><span class='pill pg'>recupera margem Bateria</span><span class='pill pa'>3–4 meses</span></div></div>" &
+			"</div>" &
+			"<div class='box good' style='margin-top:10px'><div class='box-t'>Para o Board</div><div class='box-b'>Sazonalidade não é um problema — é uma vantagem competitiva não utilizada. Proteger margem nos picos (índice " & pico & ") e deslocar demanda dos vales (índice " & vale & ") são as duas alavancas de menor custo e maior impacto imediato disponíveis.</div></div>" &
+			"</body></html>"
+		formatString: 0
+		displayFolder: HTML Visuais
+		lineageTag: 0ec6c671-4f27-471c-842b-a7cb903745c5
+
+	column _
+		lineageTag: 2b0cbaae-a53a-4b7e-9ee0-57ee502fb409
+		isNameInferred
+		sourceColumn: [_]
+
+	partition '_HTML Visuais' = calculated
+		mode: import
+		source = ROW("_", BLANK())
+

@@ -1,0 +1,204 @@
+table 'dim calendário'
+	lineageTag: 249d5831-7796-4cd5-8d28-2e8c030f64b5
+	dataCategory: Time
+
+	/// Chave primária da tabela de datas — usada nos relacionamentos (oculta nos visuais)
+	column Date
+		isHidden
+		isUnique
+		formatString: dd/MM/yyyy
+		lineageTag: 468f6412-bc65-4f48-8b12-f3678499f906
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+	/// Data formatada para exibição nos visuais
+	column Data
+		formatString: dd/MM/yyyy
+		lineageTag: e4595265-8374-4e5a-907f-dd4e0aae6b60
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Data]
+
+	/// Ano da data (ex: 2024)
+	column Ano
+		formatString: 0
+		lineageTag: cb07776d-a9b8-42c3-abd4-479ad7b0c712
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano]
+
+	/// Número do trimestre 1-4 — auxiliar de ordenação
+	column 'Trimestre Num'
+		isHidden
+		formatString: 0
+		lineageTag: 805b9451-c1e3-4bea-aa46-2e11a293a3e0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre Num]
+
+	/// Rótulo do trimestre (T1, T2, T3, T4)
+	column Trimestre
+		lineageTag: e5cbd56d-4d11-41e3-b7c0-4ee08e80a036
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+		sortByColumn: 'Trimestre Num'
+
+	/// Ano e trimestre (ex: 2024-T1)
+	column 'Ano Trimestre'
+		lineageTag: 4a93fe3f-7d11-4f6e-a0c0-f28fa6c29e4e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano Trimestre]
+
+	/// Número do mês 1-12 — auxiliar de ordenação
+	column 'Mes Num'
+		isHidden
+		formatString: 0
+		lineageTag: 7ba7277f-3028-4cc2-b508-2e9709d2be2a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes Num]
+
+	/// Nome completo do mês em português
+	column 'Mes Nome'
+		lineageTag: 4b56fa84-9f10-453d-9b6d-af4a9eb303e1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes Nome]
+		sortByColumn: 'Mes Num'
+
+	/// Abreviação do mês (jan, fev, ...)
+	column 'Mes Abrev'
+		lineageTag: 7d47623d-cada-4768-8537-a71d84c564fd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes Abrev]
+		sortByColumn: 'Mes Num'
+
+	/// Chave numérica ano-mês (ex: 202401) — auxiliar de ordenação
+	column 'Ano Mes'
+		isHidden
+		formatString: 0
+		lineageTag: 5625feab-0c98-4908-a233-76242b909ccb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano Mes]
+
+	/// Rótulo ano-mês para eixo de gráficos (ex: jan/2024)
+	column 'Ano Mes Label'
+		lineageTag: a1cb5812-615f-4a39-9e8f-de0638253619
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano Mes Label]
+		sortByColumn: 'Ano Mes'
+
+	/// Número da semana ISO no ano (1-53)
+	column 'Semana Ano'
+		formatString: 0
+		lineageTag: 9195c6af-4c4e-423c-ae80-150c6374fe8b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semana Ano]
+
+	/// Número do dia da semana (1=Seg, 7=Dom) — auxiliar de ordenação
+	column 'Dia Semana Num'
+		isHidden
+		formatString: 0
+		lineageTag: 3edd0b28-af53-49e7-8913-f30091f9e560
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia Semana Num]
+
+	/// Nome completo do dia da semana em português
+	column 'Dia Semana'
+		lineageTag: 663bcacd-ff7b-40f3-8314-7f25e475e6e4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia Semana]
+		sortByColumn: 'Dia Semana Num'
+
+	/// Abreviação do dia da semana (seg, ter, ...)
+	column 'Dia Semana Abrev'
+		lineageTag: 31178205-df73-49d8-addb-f460ddbbb046
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia Semana Abrev]
+		sortByColumn: 'Dia Semana Num'
+
+	/// Dia do mês (1-31)
+	column 'Dia Mes'
+		formatString: 0
+		lineageTag: a53e4a13-6706-43ed-a88e-c7bc40a72f6c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia Mes]
+
+	/// Dia do ano (1-365/366)
+	column 'Dia Ano'
+		formatString: 0
+		lineageTag: 215002f1-0105-4309-b687-3f2ca96105cd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia Ano]
+
+	/// Classifica o dia: Dia Util ou Fim de Semana
+	column 'Fim de Semana'
+		lineageTag: 075cb532-55ba-44fb-b611-28a9ce831ad0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fim de Semana]
+
+	/// Indica se é o último dia do mês (Sim / Nao)
+	column 'Ultimo Dia Mes'
+		lineageTag: 56ec4405-ec12-45a7-a04c-2577437da25b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ultimo Dia Mes]
+
+	/// Semestre do ano (S1 ou S2)
+	column Semestre
+		lineageTag: aff2f699-c440-447d-8c6a-914541326502
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semestre]
+
+	/// Ano e semestre combinados (ex: 2024-S1)
+	column 'Ano Semestre'
+		lineageTag: abfda919-2d79-4f63-9562-8512452f7378
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano Semestre]
+
+	partition 'dim calendário' = calculated
+		mode: import
+		source =
+				VAR _inicio = DATE(2022, 1, 1)
+				VAR _fim = DATE(2026, 12, 31)
+				VAR _datas = CALENDAR(_inicio, _fim)
+				RETURN
+				ADDCOLUMNS(
+				    _datas,
+				    "Data",              [Date],
+				    "Ano",              YEAR([Date]),
+				    "Trimestre Num",    QUARTER([Date]),
+				    "Trimestre",        "T" & QUARTER([Date]),
+				    "Ano Trimestre",    YEAR([Date]) & "-T" & QUARTER([Date]),
+				    "Mes Num",          MONTH([Date]),
+				    "Mes Nome",         FORMAT([Date], "MMMM"),
+				    "Mes Abrev",        FORMAT([Date], "MMM"),
+				    "Ano Mes",          YEAR([Date]) * 100 + MONTH([Date]),
+				    "Ano Mes Label",    FORMAT([Date], "MMM/YYYY"),
+				    "Semana Ano",       WEEKNUM([Date], 2),
+				    "Dia Semana Num",   WEEKDAY([Date], 2),
+				    "Dia Semana",       FORMAT([Date], "DDDD"),
+				    "Dia Semana Abrev", FORMAT([Date], "DDD"),
+				    "Dia Mes",          DAY([Date]),
+				    "Dia Ano",          DATEDIFF(DATE(YEAR([Date]),1,1), [Date], DAY) + 1,
+				    "Fim de Semana",    IF(WEEKDAY([Date], 2) >= 6, "Fim de Semana", "Dia Util"),
+				    "Ultimo Dia Mes",   IF([Date] = EOMONTH([Date], 0), "Sim", "Nao"),
+				    "Semestre",         IF(MONTH([Date]) <= 6, "S1", "S2"),
+				    "Ano Semestre",     YEAR([Date]) & "-" & IF(MONTH([Date]) <= 6, "S1", "S2")
+				)
+

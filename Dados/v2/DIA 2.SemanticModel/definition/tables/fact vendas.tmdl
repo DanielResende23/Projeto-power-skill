@@ -1,0 +1,454 @@
+table 'fact vendas'
+	lineageTag: ad3d64ab-a3f3-4fce-a123-0f916a1d2837
+
+	/// Soma do valor líquido de todas as vendas (após descontos)
+	measure 'Receita Líquida' = SUMX('fact vendas', VALUE('fact vendas'[valor_liquido_brl]))
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Receita
+		lineageTag: 5971e275-1ba6-4537-b420-091cb5978d16
+
+	/// Soma do valor bruto de todas as vendas (antes dos descontos)
+	measure 'Receita Bruta' = SUMX('fact vendas', VALUE('fact vendas'[valor_bruto_brl]))
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Receita
+		lineageTag: 3922b3e7-3475-471e-9a0a-ef8a75303272
+
+	/// Soma do custo total de todas as linhas de venda
+	measure 'Custo Total Vendas' = SUMX('fact vendas', VALUE('fact vendas'[custo_total_brl]))
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Receita
+		lineageTag: cad4cb4c-0699-48bd-b5d6-32a16f260e50
+
+	/// Valor absoluto total de descontos concedidos
+	measure 'Desconto Total Concedido' = SUMX('fact vendas', VALUE('fact vendas'[valor_desconto_brl]))
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Descontos
+		lineageTag: ba9ba95a-7084-4a98-8101-4138fe0d28c5
+
+	/// Quantidade total de itens vendidos
+	measure 'Qtd Itens Vendidos' = SUMX('fact vendas', VALUE('fact vendas'[quantidade]))
+		formatString: #,##0
+		displayFolder: 01 - Comercial\Volume
+		lineageTag: 8ff472fd-e8b0-46d3-847b-423c60cce71d
+
+	/// Número de pedidos distintos
+	measure 'Qtd Pedidos' = DISTINCTCOUNT('fact vendas'[id_pedido])
+		formatString: #,##0
+		displayFolder: 01 - Comercial\Volume
+		lineageTag: be6c20f9-465b-4e17-960b-1ad4a8957293
+
+	/// Número total de linhas de venda
+	measure 'Qtd Transações' = COUNTROWS('fact vendas')
+		formatString: #,##0
+		displayFolder: 01 - Comercial\Volume
+		lineageTag: f6109a72-36f0-47ab-9d17-339f4e6dcd57
+
+	/// Número de clientes distintos que realizaram ao menos uma compra no contexto
+	measure 'Clientes Ativos' = DISTINCTCOUNT('fact vendas'[id_cliente])
+		formatString: #,##0
+		displayFolder: 01 - Comercial\Clientes
+		lineageTag: a6983b10-06e2-4be7-a413-2ec8537ef3c4
+
+	/// Valor líquido médio por pedido
+	measure 'Ticket Médio por Pedido' = DIVIDE([Receita Líquida], [Qtd Pedidos])
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Volume
+		lineageTag: b19650a6-a239-4101-9e27-5877ddca33d3
+
+	/// Valor líquido médio por transação (linha de venda)
+	measure 'Ticket Médio por Linha' = DIVIDE([Receita Líquida], [Qtd Transações])
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Volume
+		lineageTag: 693f509f-220c-4181-b324-0681602b2b30
+
+	/// Percentual médio de desconto aplicado nas linhas de venda
+	measure 'Desconto Médio %' = AVERAGEX('fact vendas', VALUE('fact vendas'[desconto_pct]))
+		formatString: 0.00%
+		displayFolder: 01 - Comercial\Descontos
+		lineageTag: 76094969-bd9b-473b-9510-45082cf2b803
+
+	/// Percentual do desconto total sobre a receita bruta
+	measure 'Desconto % sobre Bruto' = DIVIDE([Desconto Total Concedido], [Receita Bruta])
+		formatString: 0.00%
+		displayFolder: 01 - Comercial\Descontos
+		lineageTag: ca7e5e3d-3d14-4b6c-ba56-de7be5baaef7
+
+	/// Receita líquida média por cliente ativo no contexto
+	measure 'Receita por Cliente' = DIVIDE([Receita Líquida], [Clientes Ativos])
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Clientes
+		lineageTag: 9c0b93ca-2509-48bd-be35-403a0391b559
+
+	/// Margem bruta em valor absoluto: Receita Líquida menos Custo Total de Vendas
+	measure 'Margem Bruta R$' = [Receita Líquida] - [Custo Total Vendas]
+		formatString: R$ #,##0.00
+		displayFolder: 02 - Rentabilidade\Margem
+		lineageTag: aa4ad1e6-f4c4-4972-a3d2-41f9480c1d2f
+
+	/// Margem bruta percentual sobre a receita líquida
+	measure 'Margem Bruta %' = DIVIDE([Margem Bruta R$], [Receita Líquida])
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Margem
+		lineageTag: bd2a7d7f-aade-4f75-80b4-6524c70178e1
+
+	/// Resultado bruto por pedido (Margem Bruta dividida por Qtd Pedidos)
+	measure 'Margem Bruta por Pedido' = DIVIDE([Margem Bruta R$], [Qtd Pedidos])
+		formatString: R$ #,##0.00
+		displayFolder: 02 - Rentabilidade\Margem
+		lineageTag: de658abd-46fa-469a-98ef-3f9a202d80b8
+
+	/// Parcela percentual da receita líquida total que cada item representa no contexto atual
+	measure '% Participação Receita' = DIVIDE([Receita Líquida], CALCULATE([Receita Líquida], ALL('fact vendas')))
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Margem
+		lineageTag: f4d2adad-a7b4-45f8-8e75-610351fe3c90
+
+	/// Parcela percentual da margem bruta total que cada item representa no contexto atual
+	measure '% Participação Margem' = DIVIDE([Margem Bruta R$], CALCULATE([Margem Bruta R$], ALL('fact vendas')))
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Margem
+		lineageTag: f32e0818-c802-40e4-b2a6-66cada0d6141
+
+	/// Receita líquida do mesmo período no ano anterior via dim calendário
+	measure 'Receita Ano Anterior' = CALCULATE([Receita Líquida], SAMEPERIODLASTYEAR('dim calendário'[Date]))
+		formatString: R$ #,##0.00
+		displayFolder: 03 - Temporal\Ano Anterior
+		lineageTag: 242214b5-f84d-467a-8ed5-4487c19d2e19
+
+	/// Variação percentual da receita líquida em relação ao mesmo período do ano anterior
+	measure 'Crescimento YoY %' = DIVIDE([Receita Líquida] - [Receita Ano Anterior], [Receita Ano Anterior])
+		formatString: +0.00%;-0.00%;0.00%
+		displayFolder: 03 - Temporal\Ano Anterior
+		lineageTag: ee4819c1-fffb-4e99-93e0-38b4890ea6a6
+
+	/// Variação absoluta da receita em relação ao ano anterior
+	measure 'Crescimento YoY R$' = [Receita Líquida] - [Receita Ano Anterior]
+		formatString: R$ #,##0.00
+		displayFolder: 03 - Temporal\Ano Anterior
+		lineageTag: 40292b02-cdeb-4279-8c3f-252daf71bbe8
+
+	/// Receita líquida do mês anterior via dim calendário
+	measure 'Receita Mês Anterior' = CALCULATE([Receita Líquida], DATEADD('dim calendário'[Date], -1, MONTH))
+		formatString: R$ #,##0.00
+		displayFolder: 03 - Temporal\Mês Anterior
+		lineageTag: ae475424-c2ab-4d5e-ac0e-bbacaadf12a6
+
+	/// Variação percentual da receita em relação ao mês anterior
+	measure 'Crescimento MoM %' = DIVIDE([Receita Líquida] - [Receita Mês Anterior], [Receita Mês Anterior])
+		formatString: +0.00%;-0.00%;0.00%
+		displayFolder: 03 - Temporal\Mês Anterior
+		lineageTag: 787eb736-4851-4687-a06f-ed3910c93af0
+
+	/// Receita líquida acumulada no ano (Year-To-Date) via dim calendário
+	measure 'Receita YTD' = CALCULATE([Receita Líquida], DATESYTD('dim calendário'[Date]))
+		formatString: R$ #,##0.00
+		displayFolder: 03 - Temporal\Acumulados
+		lineageTag: 6cf23a89-e901-4fd5-816f-10ff09ff43ad
+
+	/// Receita YTD do ano anterior para comparação
+	measure 'Receita YTD Ano Anterior' = CALCULATE([Receita YTD], SAMEPERIODLASTYEAR('dim calendário'[Date]))
+		formatString: R$ #,##0.00
+		displayFolder: 03 - Temporal\Acumulados
+		lineageTag: 157a5562-d875-4a25-b867-9bf0ec97be22
+
+	/// Receita líquida acumulada nos últimos 12 meses
+	measure 'Receita Últimos 12M' = CALCULATE([Receita Líquida], DATESINPERIOD('dim calendário'[Date], LASTDATE('dim calendário'[Date]), -12, MONTH))
+		formatString: R$ #,##0.00
+		displayFolder: 03 - Temporal\Acumulados
+		lineageTag: a57f6eee-f270-438d-ab5c-259f390e4e04
+
+	/// Receita líquida originada pelo canal Televendas
+	measure 'Receita Televendas' = CALCULATE([Receita Líquida], 'fact vendas'[canal_venda] = "Televendas")
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Canal de Venda
+		lineageTag: 8ac15792-78c2-4dac-a411-c2e13d673417
+
+	/// Receita líquida originada pelo canal Site
+	measure 'Receita Site' = CALCULATE([Receita Líquida], 'fact vendas'[canal_venda] = "Site")
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Canal de Venda
+		lineageTag: 69a2896d-703e-4cc4-989e-16950588edc1
+
+	/// Receita líquida originada pelo canal Vendedor Externo
+	measure 'Receita Vendedor Externo' = CALCULATE([Receita Líquida], 'fact vendas'[canal_venda] = "Vendedor Externo")
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Canal de Venda
+		lineageTag: b1fd94dc-af1a-4b0c-9c22-5282963e3d85
+
+	/// Receita líquida originada pelo canal Marketplace
+	measure 'Receita Marketplace' = CALCULATE([Receita Líquida], 'fact vendas'[canal_venda] = "Marketplace")
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Canal de Venda
+		lineageTag: e78c8b30-3bc8-47e4-b279-34fe2b992015
+
+	/// Participacao percentual do canal sobre o total da receita líquida
+	measure '% Receita por Canal' = DIVIDE([Receita Líquida], CALCULATE([Receita Líquida], ALL('fact vendas'[canal_venda])))
+		formatString: 0.00%
+		displayFolder: 01 - Comercial\Canal de Venda
+		lineageTag: fcfa1fab-f7e9-4488-a45e-39a59dbb1f9d
+
+	/// Margem bruta percentual filtrada pelo canal no contexto
+	measure 'Margem % por Canal' =
+			DIVIDE(
+			    CALCULATE([Margem Bruta R$]),
+			    CALCULATE([Receita Líquida])
+			)
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Canal de Venda
+		lineageTag: b67150f8-b223-4b6e-80a1-0bd7a91bf29d
+
+	/// Recencia: número de dias desde a última compra do cliente até a data máxima da base
+	measure 'RFM - Recencia (dias)' =
+			DATEDIFF(
+			    CALCULATE(MAX('fact vendas'[data_venda])),
+			    CALCULATE(MAX('fact vendas'[data_venda]), ALL('fact vendas'[id_cliente])),
+			    DAY
+			)
+		formatString: #,##0
+		displayFolder: 01 - Comercial\Clientes\RFM
+		lineageTag: 0c03ed22-1572-477f-9a78-d90b0deb57d2
+
+	/// Frequencia: número de pedidos distintos realizados pelo cliente
+	measure 'RFM - Frequencia (pedidos)' = DISTINCTCOUNT('fact vendas'[id_pedido])
+		formatString: #,##0
+		displayFolder: 01 - Comercial\Clientes\RFM
+		lineageTag: 11c7e470-6ec3-449d-b843-341a28314269
+
+	/// Valor monetário RFM: receita líquida total do cliente
+	measure 'RFM - Valor Monetario' = [Receita Líquida]
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Clientes\RFM
+		lineageTag: cceea7b3-ba25-47d7-9e89-fcd4ea4cccb4
+
+	/// Margem bruta percentual por categoria de produto no contexto filtrado
+	measure 'Margem % por Categoria' =
+			DIVIDE(
+			    CALCULATE([Margem Bruta R$]),
+			    CALCULATE([Receita Líquida])
+			)
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Produto
+		lineageTag: a9748263-c621-4020-8e63-73fc8edb6ab7
+
+	/// Contribuição de margem bruta absoluta por produto/categoria no contexto
+	measure 'Contribuição de Margem' = [Margem Bruta R$]
+		formatString: R$ #,##0.00
+		displayFolder: 02 - Rentabilidade\Produto
+		lineageTag: 12c84093-c727-4101-89d6-38130fc7b963
+
+	/// Percentual de contribuição de margem de cada produto/categoria sobre o total geral
+	measure '% Contribuição Margem Total' = DIVIDE([Margem Bruta R$], CALCULATE([Margem Bruta R$], ALL('dim produto')))
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Produto
+		lineageTag: 46e50af6-56c3-4b7a-abff-540a95807dcf
+
+	/// Valor médio de desconto concedido por pedido
+	measure 'Desconto Médio por Pedido' = DIVIDE([Desconto Total Concedido], [Qtd Pedidos])
+		formatString: R$ #,##0.00
+		displayFolder: 01 - Comercial\Descontos
+		lineageTag: 6b96b553-5100-4c11-a460-d44b597ae55f
+
+	/// Impacto do desconto na margem: quanto a margem seria maior sem os descontos concedidos
+	measure 'Impacto Desconto na Margem %' = DIVIDE([Desconto Total Concedido], [Receita Bruta] + [Desconto Total Concedido])
+		formatString: 0.00%
+		displayFolder: 02 - Rentabilidade\Margem
+		lineageTag: 1422300b-9042-4736-93a8-99649c83933a
+
+	/// Quantidade média de itens por pedido
+	measure 'Média Itens por Pedido' = DIVIDE([Qtd Itens Vendidos], [Qtd Pedidos])
+		formatString: #,##0.0
+		displayFolder: 01 - Comercial\Volume
+		lineageTag: 6164ec2b-87c6-443a-89cf-29734ae3e15d
+
+	/// Crescimento YTD vs YTD do ano anterior em percentual
+	measure 'Receita YTD Crescimento %' = DIVIDE([Receita YTD] - [Receita YTD Ano Anterior], [Receita YTD Ano Anterior])
+		formatString: +0.00%;-0.00%;0.00%
+		displayFolder: 03 - Temporal\Acumulados
+		lineageTag: ac72f4a5-64a6-46ef-b7a7-e81f27ecd08b
+
+	column id_venda
+		dataType: string
+		lineageTag: 6f8d1472-76be-4129-ac43-cfea767ca1bc
+		summarizeBy: none
+		sourceColumn: id_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_pedido
+		dataType: string
+		lineageTag: 479328dc-c5ba-431a-b39e-0e1834fc31db
+		summarizeBy: none
+		sourceColumn: id_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_venda
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 04928045-60a3-4998-bd6f-1c31e78bc9db
+		summarizeBy: none
+		sourceColumn: data_venda
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_cliente
+		dataType: string
+		lineageTag: 925bb317-6206-40e2-b38c-6b13638e2364
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produto
+		dataType: string
+		lineageTag: 399a00c2-31bc-4055-9a1f-083221ce8db0
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade
+		dataType: string
+		lineageTag: a1a50834-4ecd-4657-a80e-43be1071d8c2
+		summarizeBy: none
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco_tabela_brl
+		dataType: string
+		lineageTag: b9fcb9d3-6348-46dd-9582-cde7157fbaaa
+		summarizeBy: none
+		sourceColumn: preco_tabela_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column desconto_pct
+		dataType: string
+		lineageTag: afd8b74e-0e90-48d6-a730-65ea68690151
+		summarizeBy: none
+		sourceColumn: desconto_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco_unitario_brl
+		dataType: string
+		lineageTag: 4ff64573-c648-4d9c-ad3d-d7695a5b70e3
+		summarizeBy: none
+		sourceColumn: preco_unitario_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_bruto_brl
+		dataType: string
+		lineageTag: 966ab6c5-e0b3-4d11-a970-a60e7ffd599c
+		summarizeBy: none
+		sourceColumn: valor_bruto_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_desconto_brl
+		dataType: string
+		lineageTag: aadcf1a7-9685-4ca8-aec4-a79b68b9c6c0
+		summarizeBy: none
+		sourceColumn: valor_desconto_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_liquido_brl
+		dataType: string
+		lineageTag: e807e0cf-9bcb-49a8-ad0d-ad0889aba30c
+		summarizeBy: none
+		sourceColumn: valor_liquido_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_total_brl
+		dataType: string
+		lineageTag: 59b2be43-2ac9-42ed-a60d-de3c282f93af
+		summarizeBy: none
+		sourceColumn: custo_total_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal_venda
+		dataType: string
+		lineageTag: aa1fe852-0262-4cdc-b381-bc2fabf492cb
+		summarizeBy: none
+		sourceColumn: canal_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column forma_pagamento
+		dataType: string
+		lineageTag: 8b30439e-f877-42ef-8f6f-0cf2114599a3
+		summarizeBy: none
+		sourceColumn: forma_pagamento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fact vendas' = m
+		mode: import
+		source =
+				let
+				    Source = raw,
+				    #"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_fato_vendas_raw csv" = Source{[#"Folder Path"="C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\",Name="fato_vendas_raw.csv"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_fato_vendas_raw csv",[Delimiter=";", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Normalized data_venda" = Table.TransformColumns(
+				        #"Promoted Headers",
+				        {{"data_venda", each
+				            let
+				                val = Text.Trim(_)
+				            in
+				                if val = null or val = "" then
+				                    null
+				                else if Text.Length(val) = 10 and Text.At(val, 4) = "-" then
+				                    let
+				                        dd = Number.FromText(Text.Middle(val, 8, 2)),
+				                        mm = Number.FromText(Text.Middle(val, 5, 2)),
+				                        aaaa = Number.FromText(Text.Start(val, 4))
+				                    in
+				                        try Text.PadStart(Text.From(dd), 2, "0") & "/" & Text.PadStart(Text.From(mm), 2, "0") & "/" & Text.From(aaaa) otherwise null
+				                else
+				                    val,
+				            type text
+				        }}
+				    ),
+				    #"Changed Types" = Table.TransformColumnTypes(
+				        #"Normalized data_venda",
+				        {
+				            {"id_venda", type text},
+				            {"id_pedido", type text},
+				            {"data_venda", type date},
+				            {"id_cliente", type text},
+				            {"id_produto", type text},
+				            {"quantidade", Int64.Type},
+				            {"preco_tabela_brl", type number},
+				            {"desconto_pct", type number},
+				            {"preco_unitario_brl", type number},
+				            {"valor_bruto_brl", type number},
+				            {"valor_desconto_brl", type number},
+				            {"valor_liquido_brl", type number},
+				            {"custo_total_brl", type number},
+				            {"canal_venda", type text},
+				            {"forma_pagamento", type text}
+				        },
+				        "pt-BR"
+				    ),
+				    #"Replaced blank forma_pagamento" = Table.TransformColumns(
+				        #"Changed Types",
+				        {{"forma_pagamento", each
+				            if _ = null or Text.Trim(_) = "" then "Não Informado" else _,
+				            type text
+				        }}
+				    )
+				in
+				    #"Replaced blank forma_pagamento"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,78 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 326,
+            "y": 70
+          },
+          "nodeIndex": "fact vendas",
+          "nodeLineageTag": "ad3d64ab-a3f3-4fce-a123-0f916a1d2837",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "dim cliente",
+          "nodeLineageTag": "80d37637-b6fd-4b50-94fe-025e4ab77317",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 2,
+          "expandedHeight": 296
+        },
+        {
+          "location": {
+            "x": 614,
+            "y": 0
+          },
+          "nodeIndex": "dim produto",
+          "nodeLineageTag": "d49f007d-07c7-4f8a-a562-44769b743c4a",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3,
+          "expandedHeight": 296
+        },
+        {
+          "location": {
+            "x": 86.4000015258789,
+            "y": 252.40000915527344
+          },
+          "nodeIndex": "dim calendário",
+          "nodeLineageTag": "249d5831-7796-4cd5-8d28-2e8c030f64b5",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 4,
+          "expandedHeight": 300
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

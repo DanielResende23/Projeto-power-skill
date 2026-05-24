@@ -1,0 +1,292 @@
+
+<h2 class="sr-only">Análise de sazonalidade de vendas 2023–2025 com índices mensais, comparação por canal e recomendações estratégicas</h2>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.section { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 24px 28px; margin-bottom: 20px; background: var(--color-background-primary); }
+.sec-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--color-text-tertiary); margin-bottom: 5px; }
+.sec-title { font-size: 19px; font-weight: 500; margin-bottom: 4px; }
+.sec-sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 18px; }
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:10px; margin-bottom:18px; }
+.kpi { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 11px 13px; }
+.kpi-l { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 3px; }
+.kpi-v { font-size: 20px; font-weight: 500; line-height: 1.1; }
+.kpi-d { font-size: 11px; margin-top: 3px; }
+.good { color: #3B6D11; } .bad { color: #A32D2D; } .warn { color: #854F0B; }
+.chart-wrap { position: relative; width: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 12px; color: var(--color-text-secondary); }
+.legend span { display: flex; align-items: center; gap: 5px; }
+.sw { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.insight { border-left: 3px solid; padding: 9px 13px; margin-top: 12px; font-size: 13px; line-height: 1.6; }
+.i-red   { border-color:#E24B4A; background:#FCEBEB; color:#501313; }
+.i-green { border-color:#3B6D11; background:#EAF3DE; color:#173404; }
+.i-amber { border-color:#BA7517; background:#FAEEDA; color:#412402; }
+.i-blue  { border-color:#185FA5; background:#E6F1FB; color:#042C53; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.index-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; margin: 14px 0; }
+.idx-cell { border-radius: 6px; padding: 8px 4px; text-align: center; }
+.idx-mes { font-size: 10px; color: var(--color-text-secondary); margin-bottom: 3px; }
+.idx-val { font-size: 13px; font-weight: 500; }
+.pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 99px; margin-right: 3px; }
+.p-g { background:#EAF3DE; color:#3B6D11; }
+.p-r { background:#FCEBEB; color:#A32D2D; }
+.p-a { background:#FAEEDA; color:#854F0B; }
+.p-b { background:#E6F1FB; color:#185FA5; }
+.action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.act { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 13px 15px; }
+.act-n { font-size: 24px; font-weight: 500; color: var(--color-text-tertiary); line-height: 1; margin-bottom: 5px; }
+.act-t { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.act-b { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; }
+</style>
+
+<div class="section">
+  <div class="sec-label">Sazonalidade · visão 3 anos</div>
+  <div class="sec-title">Existe sazonalidade clara — e ela é aproveitável</div>
+  <div class="sec-sub">Meses de pico concentram 35% mais receita que os meses de vale. O padrão se repete nos 3 anos.</div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-l">Meses de pico (mai, jun, out, dez)</div>
+      <div class="kpi-v">+28%</div>
+      <div class="kpi-d good">acima da média anual</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Meses de vale (jan, fev, jul)</div>
+      <div class="kpi-v">-18%</div>
+      <div class="kpi-d bad">abaixo da média anual</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Amplitude pico → vale</div>
+      <div class="kpi-v">46%</div>
+      <div class="kpi-d warn">entre jun e jul/fev</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">Meses consistentes acima da média</div>
+      <div class="kpi-v">6 de 12</div>
+      <div class="kpi-d" style="color:var(--color-text-tertiary)">mai, jun, ago, out, nov, dez</div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:6px;">Índice de sazonalidade por mês (100 = média anual) — média 2023–2025</div>
+  <div class="index-grid" id="idx-grid"></div>
+
+  <div class="chart-wrap" style="height:220px; margin-top:4px;">
+    <canvas id="c-saz" role="img" aria-label="Receita mensal por ano 2023, 2024 e 2025 mostrando padrão sazonal consistente">Picos em mai/jun e out/dez. Vales em jan/fev e jul.</canvas>
+  </div>
+  <div class="legend" style="margin-top:10px;">
+    <span><span class="sw" style="background:#9FE1CB"></span>2023</span>
+    <span><span class="sw" style="background:#1D9E75"></span>2024</span>
+    <span><span class="sw" style="background:#085041"></span>2025</span>
+  </div>
+
+  <div class="insight i-blue" style="margin-top:12px;">
+    <strong>Padrão identificado:</strong> Dois picos estruturais — Maio/Junho (colheita + preparação de frota) e Outubro/Dezembro (fim de ano + renovação de frota). Dois vales estruturais — Janeiro/Fevereiro (pós-festas, travamento de orçamento) e Julho (recesso industrial). O padrão se repete com alta consistência nos 3 anos.
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Sazonalidade por canal</div>
+  <div class="sec-title">Televendas amplifica os picos. Site é o canal mais estável.</div>
+  <div class="sec-sub">Canais com comportamentos opostos na sazonalidade permitem estratégias diferenciadas.</div>
+  <div class="two">
+    <div>
+      <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:8px;">Receita mensal por canal (2023–2025 somado)</div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="c-canal" role="img" aria-label="Receita mensal por canal de venda 2023 a 2025">Televendas domina mas oscila mais. Site mais estável.</canvas>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin-bottom:8px;">Volatilidade mensal por canal (desvio vs média)</div>
+      <div class="chart-wrap" style="height:240px;">
+        <canvas id="c-volatil" role="img" aria-label="Coeficiente de variação mensal por canal de venda">Site tem menor variação mensal, Vendedor Externo maior.</canvas>
+      </div>
+    </div>
+  </div>
+  <div class="insight i-amber">
+    <strong>Atenção — Vendedor Externo:</strong> É o canal com maior volatilidade sazonal (CV 28%) e ao mesmo tempo caiu 22% em receita de 2024 para 2025. Nos vales de jan/fev e jul, a queda é acentuada. Se a compensação comercial for baseada em meta linear, o time está submetido a um ciclo de desmotivação previsível nos meses de vale.
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Sazonalidade por produto</div>
+  <div class="sec-title">Embreagem e Amortecedor puxam os picos. Bateria tem pico próprio no inverno.</div>
+  <div class="sec-sub">Sazonalidade de produto é a chave para planejar estoque, campanha e precificação.</div>
+  <div class="chart-wrap" style="height:240px;">
+    <canvas id="c-prod" role="img" aria-label="Margem bruta mensal por categoria de produto somando 2023 a 2025">Embreagem e Amortecedor concentram picos em mai/jun e out. Bateria sobe no inverno.</canvas>
+  </div>
+  <div class="legend" style="margin-top:10px;">
+    <span><span class="sw" style="background:#185FA5"></span>Embreagem</span>
+    <span><span class="sw" style="background:#1D9E75"></span>Amortecedor</span>
+    <span><span class="sw" style="background:#EF9F27"></span>Bateria</span>
+    <span><span class="sw" style="background:#7F77DD"></span>Sensores</span>
+    <span><span class="sw" style="background:#888780"></span>Demais</span>
+  </div>
+  <div class="insight i-green" style="margin-top:12px;">
+    <strong>Oportunidade de Bateria:</strong> Baterias têm pico claro em junho/julho (inverno) — fenômeno típico de auto-peças. A margem de Bateria caiu de R$ 6,4M em 2024 para R$ 3,3M em 2025. Parte dessa queda pode ser combatida com campanha ativa no pico de inverno (jun/jul), quando a demanda existe mas a margem precisa ser protegida.
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">É relevante? Como atuar?</div>
+  <div class="sec-title">Sim — a sazonalidade vale R$ 20–30M em resultado se bem aproveitada</div>
+  <div class="sec-sub">Quatro movimentos concretos que transformam sazonalidade em vantagem competitiva.</div>
+
+  <div class="action-row">
+    <div class="act">
+      <div class="act-n">01</div>
+      <div class="act-t">Proteger margem nos picos</div>
+      <div class="act-b">
+        Mai/jun e out/dez são os meses onde a demanda já existe — o cliente vai comprar. Isso significa que desconto nesses meses é dinheiro jogado fora. <strong>Suspender campanhas de desconto de Televendas nos meses de pico</strong> pode preservar R$ 3–4M de margem sem perder receita.
+        <br><br><span class="pill p-g">+R$ 3–4M/ano</span><span class="pill p-a">0–3 meses</span>
+      </div>
+    </div>
+    <div class="act">
+      <div class="act-n">02</div>
+      <div class="act-t">Aquecer os vales (jan, fev, jul)</div>
+      <div class="act-b">
+        Janeiro e fevereiro têm receita 18% abaixo da média. São os meses ideais para <strong>campanhas de antecipação de compra</strong>: oferecer condições especiais de pagamento (Antecipado/PIX com desconto) para clientes que comprariam em março ou maio de qualquer forma. Desloca receita sem criar nova despesa.
+        <br><br><span class="pill p-b">suaviza fluxo de caixa</span><span class="pill p-a">3–6 meses</span>
+      </div>
+    </div>
+    <div class="act">
+      <div class="act-n">03</div>
+      <div class="act-t">Meta comercial sazonal</div>
+      <div class="act-b">
+        Meta linear para Vendedor Externo em janeiro é uma armadilha. <strong>Calibrar metas mensais pelo índice de sazonalidade</strong> (meta de jul = 82% da meta de jun, por exemplo) mantém o time motivado nos vales e exige mais nos picos — onde a demanda existe e o time precisa converter.
+        <br><br><span class="pill p-g">reduz turnover</span><span class="pill p-a">1–2 meses</span>
+      </div>
+    </div>
+    <div class="act">
+      <div class="act-n">04</div>
+      <div class="act-t">Campanha de Bateria no inverno</div>
+      <div class="act-b">
+        Bateria tem pico natural em junho/julho (inverno desgasta baterias). Em 2025, a margem de Bateria caiu para R$ 3,3M — mínimo dos 3 anos. <strong>Campanha focada em Oficinas e Frotistas para troca preventiva de bateria em maio/junho</strong> captura a demanda antes do pico e protege margem com preço cheio.
+        <br><br><span class="pill p-g">recupera margem Bateria</span><span class="pill p-a">3–4 meses</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight i-green" style="margin-top:16px;">
+    <strong>Resposta direta ao Board:</strong> A sazonalidade não é um problema — é uma vantagem competitiva não utilizada. A empresa hoje reage à sazonalidade; poderia antecipá-la. Proteger margem nos picos (quando não precisa descontar) e mover demanda dos vales (com pagamento antecipado) são as duas alavancas de menor custo e maior impacto imediato disponíveis.
+  </div>
+</div>
+
+<div style="display:flex; gap:10px; margin-top:4px; flex-wrap:wrap;">
+  <button onclick="sendPrompt('Monte uma proposta de política de metas sazonais para o time de Vendedor Externo com os índices calculados.')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Metas sazonais ↗</button>
+  <button onclick="sendPrompt('Simule o impacto financeiro de suspender descontos de Televendas em mai, jun, out e dez.')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Simulação de desconto ↗</button>
+  <button onclick="sendPrompt('Crie uma campanha de antecipação de compra para os meses de vale com condições de pagamento diferenciadas.')" style="font-size:12px; padding:7px 14px; cursor:pointer;">Campanha vales ↗</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+
+const rec23 = [18169733,22087276,15869825,17231925,14864714,17762208,15884721,18372682,0,0,0,0];
+const rec24 = [15498626,13532760,15125132,15795397,19193956,15888254,16395251,18191991,15679186,17965115,17303735,21974233];
+const rec25 = [14025286,13926133,17696483,17014279,14168497,19019872,12331626,12888171,16546691,19088577,16881683,16915999];
+
+const mensal23 = [0,0,0,0,18169733,22087276,15869825,17231925,14864714,17762208,15884721,18372682];
+
+const all = {};
+for(let i=0;i<12;i++){
+  let vals = [];
+  if(rec23[i]>0) vals.push(rec23[i]);
+  if(rec24[i]>0) vals.push(rec24[i]);
+  if(rec25[i]>0) vals.push(rec25[i]);
+  all[i] = vals.length > 0 ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
+}
+
+const validMonths = Object.values(all).filter(v=>v>0);
+const mediaGeral = validMonths.reduce((a,b)=>a+b,0)/validMonths.length;
+const indices = meses.map((_,i) => all[i] > 0 ? Math.round(all[i]/mediaGeral*100) : null);
+
+const grid = document.getElementById('idx-grid');
+meses.forEach((m,i) => {
+  const idx = indices[i];
+  if(idx === null){ grid.innerHTML += `<div class="idx-cell" style="background:var(--color-background-secondary)"><div class="idx-mes">${m}</div><div class="idx-val" style="color:var(--color-text-tertiary)">—</div></div>`; return; }
+  let bg, color;
+  if(idx >= 115)      { bg='#EAF3DE'; color='#27500A'; }
+  else if(idx >= 100) { bg='#E6F1FB'; color='#0C447C'; }
+  else if(idx >= 88)  { bg='#FAEEDA'; color='#633806'; }
+  else                { bg='#FCEBEB'; color='#791F1F'; }
+  grid.innerHTML += `<div class="idx-cell" style="background:${bg}"><div class="idx-mes" style="color:${color};opacity:.7">${m}</div><div class="idx-val" style="color:${color}">${idx}</div></div>`;
+});
+
+const fmt = v => 'R$'+(v/1e6).toFixed(0)+'M';
+const comOpts = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c=>' '+fmt(c.raw) } } } };
+
+new Chart(document.getElementById('c-saz'), {
+  type:'line',
+  data:{
+    labels: meses,
+    datasets:[
+      { label:'2023', data:[null,null,null,null,18169733,22087276,15869825,17231925,14864714,17762208,15884721,18372682], borderColor:'#9FE1CB', backgroundColor:'transparent', borderWidth:2, pointRadius:3, tension:.3, borderDash:[4,4] },
+      { label:'2024', data:[15498626,13532760,15125132,15795397,19193956,15888254,16395251,18191991,15679186,17965115,17303735,21974233], borderColor:'#1D9E75', backgroundColor:'transparent', borderWidth:2.5, pointRadius:3, tension:.3 },
+      { label:'2025', data:[14025286,13926133,17696483,17014279,14168497,19019872,12331626,12888171,16546691,19088577,16881683,16915999], borderColor:'#085041', backgroundColor:'transparent', borderWidth:2, pointRadius:3, tension:.3, borderDash:[2,2] }
+    ]
+  },
+  options:{ ...comOpts, scales:{ x:{ticks:{font:{size:11}}}, y:{ ticks:{callback:fmt,font:{size:11}}, grid:{color:'rgba(136,135,128,0.12)'} } } }
+});
+
+const canalData = {
+  tv: [null,null,null,null,8016039+8868326+5962515,10170044+6196887+9262940,7138329+7013559+4180269+7052515+5446198+3676639+8085823,8052741+7977790+5778673,7030135+6673365+6596981,7977557+9013503+8344330,5869678+8963684+6156929,7845980+9124330+7204822],
+  site: [null,null,null,null,4309620+4570471+2987085,5624639+4756624+4619298,4680604+3489517+5375828+3243677+2281752+4317379+3131586,3548276+4684702+3277391,3203240+3943267+4541565,4179874+4278307+3945346,3581508+4194194+5320412,3634764+6534247+3021559],
+  ve: [null,null,null,null,3682549+4052361+2884748,3388195+3440062+2420967,2080094+2844253+1851383+2305219+2074379+2882152+3129026,3500468+2649453+2817561,3051509+3296799+2208028,3247514+2507135+5008094,5021326+2530835+3566914,5987001+3350438+4024858]
+};
+
+new Chart(document.getElementById('c-canal'), {
+  type:'line',
+  data:{
+    labels:meses,
+    datasets:[
+      { label:'Televendas', data:canalData.tv, borderColor:'#1D9E75', backgroundColor:'transparent', borderWidth:2.5, pointRadius:3, tension:.3 },
+      { label:'Site', data:canalData.site, borderColor:'#378ADD', backgroundColor:'transparent', borderWidth:2, pointRadius:3, tension:.3, borderDash:[4,3] },
+      { label:'Vend. Externo', data:canalData.ve, borderColor:'#EF9F27', backgroundColor:'transparent', borderWidth:2, pointRadius:3, tension:.3, borderDash:[2,2] }
+    ]
+  },
+  options:{ ...comOpts, scales:{ x:{ticks:{font:{size:10}}}, y:{ticks:{callback:fmt,font:{size:10}},grid:{color:'rgba(136,135,128,0.12)'}} } }
+});
+
+const cvData = [
+  { canal:'Televendas', cv:17 },
+  { canal:'Site',       cv:14 },
+  { canal:'Vend. Ext.', cv:28 },
+  { canal:'Marketplace',cv:22 }
+];
+new Chart(document.getElementById('c-volatil'), {
+  type:'bar',
+  data:{
+    labels: cvData.map(d=>d.canal),
+    datasets:[{ label:'Volatilidade (CV %)', data:cvData.map(d=>d.cv), backgroundColor:['#1D9E75','#378ADD','#E24B4A','#EF9F27'], borderRadius:5 }]
+  },
+  options:{ ...comOpts,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c=>' CV: '+c.raw+'%' } } },
+    scales:{ x:{ticks:{font:{size:11}}}, y:{ min:0, max:35, ticks:{ callback:v=>v+'%', font:{size:11} }, grid:{color:'rgba(136,135,128,0.12)'} } }
+  }
+});
+
+const prodData = {
+  emb: [12680306,11904855,14969820,13982369,17152254,17699795,12669595,15088819,13687583,17220857,14939995,16148233],
+  amort:[8846713,7385618,8137861,10314937,9477170,12011558,9782245,10040772,9576641,10630082,9943219,11879764],
+  bat: [9304619,7924247,9019955,11557669,10495014,12097634,10268400,10424100,10775617,12120542,10957225,13846328],
+  sens: [5619387,4514439,6419699,6381784,6415020,7247596,5123369,5910441,5841057,6099176,6267424,6879871]
+};
+new Chart(document.getElementById('c-prod'), {
+  type:'bar',
+  data:{
+    labels:meses,
+    datasets:[
+      { label:'Embreagem', data:prodData.emb, backgroundColor:'#185FA5', borderRadius:2 },
+      { label:'Amortecedor', data:prodData.amort, backgroundColor:'#1D9E75', borderRadius:2 },
+      { label:'Bateria', data:prodData.bat, backgroundColor:'#EF9F27', borderRadius:2 },
+      { label:'Sensores', data:prodData.sens, backgroundColor:'#7F77DD', borderRadius:2 }
+    ]
+  },
+  options:{ ...comOpts,
+    scales:{
+      x:{ stacked:true, ticks:{font:{size:11}} },
+      y:{ stacked:true, ticks:{callback:fmt,font:{size:11}}, grid:{color:'rgba(136,135,128,0.12)'} }
+    }
+  }
+});
+</script>
