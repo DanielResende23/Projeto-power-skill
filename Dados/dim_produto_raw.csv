@@ -1,0 +1,41 @@
+﻿id_produto;sku;descricao;categoria;veiculo_aplicacao;peso_kg;custo_unit_usd;preco_unit_brl;qtd_por_embalagem
+1;FIL-1001;Filtros Renault Linha A;Filtros;Fiat;0,40;4,07;55,03;2
+2;FIL-1002;Filtros Honda Linha B;Filtros;Jeep;0,41;11,05;149,40;12
+3;FIL-1003;Filtros Hyundai Linha C;Filtros;Jeep;0,43;10,58;143,04;6
+4;FIL-1004;Filtros Fiat Linha D;Filtros;Ford;0,41;5,16;69,76;1
+5;FIL-1005;Filtros Hyundai Linha E;Filtros;Toyota;0,44;7,05;95,32;2
+6;PST-1001;Pastilhas Freio Toyota Linha A;Pastilhas Freio;Honda;1,15;28,72;358,43;12
+7;PST-1002;Pastilhas Freio Fiat Linha B;Pastilhas Freio;Renault;1.28;35,22;439,55;12
+8;PST-1003;Pastilhas Freio Jeep Linha C;Pastilhas Freio;Ford;1,18;25,89;323,11;1
+9;PST-1004;Pastilhas Freio Hyundai Linha D;Pastilhas Freio;Honda;1,15;40,89;510,31;1
+10;PST-1005;Pastilhas Freio Hyundai Linha E;Pastilhas Freio;Fiat;1,23;28,77;359,05;6
+11;EMB-1001;;Embreagem;Hyundai;6,99;183,74;2101,99;6
+12;EMB-1002;;Embreagem;Jeep;6,03;263,77;3017,53;6
+13;EMB-1003;Embreagem Jeep Linha C;Embreagem;GM;7,10;185,03;2116,74;2
+14;EMB-1004;Embreagem Renault Linha D;Embreagem;Fiat;7,40;244,54;2797,54;12
+15;EMB-1005;Embreagem GM Linha E;Embreagem;Fiat;5,80;168,73;1930,27;6
+16;AMO-1001;Amortecedor Renault Linha A;Amortecedor;Ford;5,11;134,40;1747,20;12
+17;AMO-1002;Amortecedor Renault Linha B;Amortecedor;Renault;5,52;96,29;1251,77;6
+18;AMO-1003;Amortecedor GM Linha C;Amortecedor;Ford;4,66;152,69;1984,97;4
+19;AMO-1004;Amortecedor Jeep Linha D;Amortecedor;Hyundai;4.30;41,30;536,90;12
+20;AMO-1005;Amortecedor GM Linha E;Amortecedor;Ford;4.60;169,77;2207,01;6
+21;BAT-1001;Bateria Hyundai Linha A;Bateria;Honda;15.66;134,66;1330,44;12
+22;BAT-1002;Bateria Ford Linha B;Bateria;Toyota;12,47;166,22;1642,25;6
+23;BAT-1003;Bateria Renault Linha C;Bateria;Ford;12,75;206,69;2042,10;6
+24;BAT-1004;Bateria Honda Linha D;Bateria;Hyundai;13.12;207,52;2050,30;1
+25;BAT-1005;;Bateria;Fiat;16,25;163,77;1618,05;2
+26;VEL-1001;;Velas;Universal;0,10;14,47;225,73;1
+27;VEL-1002;Velas Fiat Linha B;Velas;Jeep;0,10;4,00;62,40;2
+28;VEL-1003;Velas Renault Linha C;Velas;Ford;0.10;7,47;116,53;4
+29;VEL-1004;Velas Jeep Linha D;Velas;Jeep;0,09;6,17;96,25;6
+30;VEL-1005;Velas Renault Linha E;Velas;GM;0,11;13,66;213,10;6
+31;ILU-1001;Iluminacao Renault Linha A;Iluminacao;Ford;0.68;41,51;604,39;1
+32;ILU-1002;Iluminacao VW Linha B;Iluminacao;Jeep;0,54;31,81;463,15;4
+33;ILU-1003;Iluminacao VW Linha C;Iluminacao;Renault;0,58;36,94;537,85;2
+34;ILU-1004;Iluminacao Honda Linha D;Iluminacao;Fiat;0,68;29,43;428,50;1
+35;ILU-1005;Iluminacao Universal Linha E;Iluminacao;Universal;0,63;55,53;808,52;12
+36;SEN-1001;Sensores Hyundai Linha A;Sensores;Toyota;0,32;78,17;1097,51;1
+37;SEN-1002;Sensores Jeep Linha B;Sensores;VW;0,30;80,71;1133,17;2
+38;SEN-1003;Sensores Jeep Linha C;Sensores;Toyota;0,27;91,77;1288,45;6
+39;SEN-1004;Sensores Fiat Linha D;Sensores;Renault;0.32;92,59;1299,96;6
+40;SEN-1005;Sensores VW Linha E;Sensores;Universal;0.31;26,03;365,46;12

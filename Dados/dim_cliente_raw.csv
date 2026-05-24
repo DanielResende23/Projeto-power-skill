@@ -1,0 +1,201 @@
+﻿id_cliente;nome_cliente;cnpj;tipo_cliente;uf;uf_nome;cidade;limite_credito_brl;data_cadastro
+1;Forte Veiculos 25;96.998.120/0001-26;Oficina;ES;Espirito Santo;Vitoria;13644;11/04/2020
+2;Centro Motors 85;59.379.535/0001-78;Frotista;SP;Sao Paulo;Sorocaba;129769;04/12/2020
+3;Garagem Motors 34;63.394.578/0001-32;Oficina;PE;Pernambuco;Olinda;13206;03/06/2021
+4;Real Atacado 36;37.336.105/0001-21;Oficina;RJ;Rio de Janeiro;Nova Iguacu;20955;13/09/2020
+5;Premium Veiculos 24;55.966.260/0001-55;Varejo Peca;RS;Rio Grande do Sul;Caxias do Sul;57982;06/02/2020
+6;Nacional Center 72;37.683.401/0001-82;Oficina;RS;Rio Grande do Sul;;19527;29/09/2021
+7;Imports Autopecas 56;97.161.877/0001-55;Oficina;RS;Rio Grande do Sul;;6768;18/03/2022
+8;Imports Diesel 9;50.265.367/0001-42;Varejo Peca;RS;Rio Grande do Sul;Porto Alegre;23134;24/11/2022
+9;Auto Pecas 13;49.225.196/0001-97;Oficina;SP;Sao Paulo;Santos;8175;07/02/2020
+10;King Diesel 81;88.138.513/0001-50;Oficina;PR;Parana;Londrina;17404;15/01/2022
+11;Royal Autopecas 88;74.797.357/0001-59;Concessionaria;PR;Parana;Londrina;118571;12/08/2021
+12;Santa Comercio 4;52.396.844/0001-25;Oficina;ES;Espirito Santo;Vila Velha;9191;01/08/2021
+13;Auto Atacado 44;17.838.215/0001-30;Varejo Peca;BA;Bahia;Feira de Santana;18267;24/07/2022
+14;Nacional Veiculos 84;64.692.229/0001-55;Varejo Peca;SP;Sao Paulo;Campinas;23717;02/12/2020
+15;Sao Truck 17;13.777.834/0001-79;Atacadista;MG;Minas Gerais;Uberlandia;95867;20/02/2020
+16;Distribuidora Pecas 3;71.527.370/0001-50;Atacadista;MG;Minas Gerais;Juiz de Fora;119208;22/06/2022
+17;Casa Atacado 5;75.939.371/0001-53;Oficina;ES;Espirito Santo;Serra;17305;01/05/2020
+18;Premium Pecas 81;70.159.327/0001-96;Oficina;BA;Bahia;Feira de Santana;24519;25/05/2020
+19;Rede Distribuidor 30;45.451.981/0001-35;Frotista;PE;Pernambuco;;93007;23/02/2021
+20;Top Veiculos 75;30.743.520/0001-29;Varejo Peca;MG;Minas Gerais;Contagem;24234;13/07/2020
+21;Premium Atacado 90;14.754.276/0001-20;Atacadista;CE;Ceara;Caucaia;152082;28/07/2021
+22;Bom Autopecas 3;99.696.414/0001-83;Oficina;MG;Minas Gerais;Juiz de Fora;14735;31/12/2022
+23;Express Veiculos 85;75.207.187/0001-28;Varejo Peca;ES;Espirito Santo;Vila Velha;16218;24/01/2021
+24;Bom Diesel 85;30.399.402/0001-79;Oficina;MG;Minas Gerais;Juiz de Fora;20319;25/08/2021
+25;Bom Veiculos 2;92.591.532/0001-55;Oficina;MG;Minas Gerais;Contagem;21641;27/03/2020
+26;Mecanica Atacado 19;24.627.783/0001-92;Oficina;SP;Sao Paulo;Sorocaba;6607;28/03/2023
+27;Loja Atacado 20;41.229.208/0001-51;Oficina;PE;Pernambuco;Recife;16189;13/07/2020
+28;Imports Diesel 39;54.585.610/0001-25;Oficina;SP;Sao Paulo;Sao Jose dos Campos;17246;19/02/2020
+29;King Diesel 45;21.927.606/0001-49;Varejo Peca;RJ;Rio de Janeiro;Duque de Caxias;12293;05/10/2021
+30;Master Atacado 72;94.977.605/0001-61;Oficina;BA;Bahia;Salvador;10298;28/06/2021
+31;Santa Distribuidor 98;62.951.922/0001-85;Oficina;SP;Sao Paulo;Ribeirao Preto;20318;09/02/2021
+32;Sao Motors 56;25.427.372/0001-66;Varejo Peca;SP;Sao Paulo;Ribeirao Preto;21917;09/10/2021
+33;Mecanica Motors 72;44.400.688/0001-68;Oficina;SP;Sao Paulo;Sao Jose dos Campos;19993;31/12/2020
+34;Mecanica Autopecas 87;73.794.967/0001-91;Varejo Peca;MG;Minas Gerais;Juiz de Fora;47892;08/03/2020
+35;Mecanica Pecas 52;11.373.672/0001-99;Oficina;RJ;Rio de Janeiro;Nova Iguacu;18938;01/11/2021
+36;Master Importadora 62;14.875.325/0001-91;Varejo Peca;SP;Sao Paulo;Sorocaba;25615;28/07/2022
+37;Forte Truck 59;89.745.478/0001-20;Oficina;RS;Rio Grande do Sul;Caxias do Sul;14329;18/02/2020
+38;Prime Motors 43;69.311.720/0001-96;Atacadista;SC;Santa Catarina;Blumenau;293078;17/04/2022
+39;Santa Atacado 88;27.210.128/0001-44;Varejo Peca;SC;Santa Catarina;;38631;23/11/2020
+40;Distribuidora Importadora 85;53.455.425/0001-87;Varejo Peca;SP;Sao Paulo;Sorocaba;42479;23/07/2020
+41;Mega Veiculos 63;71.928.474/0001-42;Atacadista;SP;Sao Paulo;Santos;83309;20/08/2020
+42;Bom Comercio 39;16.934.520/0001-18;Varejo Peca;SP;Sao Paulo;Santos;19351;24/05/2020
+43;Nacional Autopecas 66;86.432.600/0001-50;Concessionaria;RS;Rio Grande do Sul;Caxias do Sul;244635;06/05/2021
+44;Star Motors 98;77.633.989/0001-59;Concessionaria;MG;Minas Gerais;Belo Horizonte;94073;27/08/2022
+45;Distribuidora Truck 55;77.229.626/0001-37;Oficina;DF;Distrito Federal;Brasilia;14177;24/09/2021
+46;Universal Veiculos 42;93.501.645/0001-88;Oficina;BA;Bahia;Vitoria da Conquista;11002;23/03/2020
+47;Centro Motors 17;94.686.162/0001-95;Varejo Peca;SP;Sao Paulo;;49460;21/01/2023
+48;Casa Motors 35;98.465.231/0001-68;Concessionaria;SP;Sao Paulo;Santos;242251;22/04/2022
+49;Sao Motors 53;72.659.129/0001-48;Atacadista;SP;Sao Paulo;Sao Paulo;210306;04/01/2022
+50;Bom Comercio 20;28.831.620/0001-15;Oficina;RJ;Rio de Janeiro;;22803;10/08/2020
+51;Star Center 43;30.615.295/0001-21;Oficina;SP;Sao Paulo;Sao Paulo;19649;17/11/2020
+52;Casa Truck 29;73.317.481/0001-30;Atacadista;RS;Rio Grande do Sul;Porto Alegre;215406;30/03/2020
+53;King Distribuidor 91;49.744.856/0001-66;Varejo Peca;MT;Mato Grosso;Varzea Grande;18877;12/02/2020
+54;Loja Truck 15;55.831.795/0001-89;Frotista;PR;Parana;Curitiba;118287;13/05/2022
+55;Loja Comercio 4;28.763.749/0001-44;Varejo Peca;SP;Sao Paulo;Campinas;36439;21/08/2021
+56;Express Importadora 35;72.241.210/0001-28;Oficina;SC;Santa Catarina;Joinville;21490;10/02/2020
+57;Nacional Veiculos 76;99.786.673/0001-51;Oficina;SP;Sao Paulo;Santos;4061;27/10/2021
+58;Garagem Atacado 68;22.933.382/0001-47;Oficina;PA;Para;Belem;21061;15/01/2023
+59;Diamond Importadora 73;92.919.688/0001-68;Oficina;SP;Sao Paulo;Sao Paulo;5394;25/07/2020
+60;Centro Pecas 14;31.647.981/0001-42;Frotista;PR;Parana;Curitiba;70939;23/02/2023
+61;Express Autopecas 94;52.834.256/0001-49;Atacadista;PA;Para;Belem;290971;10/08/2020
+62;Santa Truck 52;50.528.142/0001-72;Frotista;SP;Sao Paulo;;50996;07/11/2021
+63;Prime Diesel 61;71.642.116/0001-73;Oficina;PR;Parana;Londrina;15992;09/01/2022
+64;Real Motors 38;76.421.373/0001-65;Varejo Peca;MG;Minas Gerais;Belo Horizonte;20534;07/02/2023
+65;Prime Diesel 48;85.177.667/0001-31;Concessionaria;MG;Minas Gerais;;209226;07/09/2020
+66;Real Comercio 52;41.301.152/0001-43;Atacadista;MG;Minas Gerais;Belo Horizonte;294107;20/04/2022
+67;Casa Pecas 28;90.922.829/0001-81;Oficina;RJ;Rio de Janeiro;Duque de Caxias;18546;08/08/2022
+68;Royal Importadora 66;14.979.294/0001-93;Oficina;CE;Ceara;Fortaleza;16871;19/07/2020
+69;Super Center 27;89.761.144/0001-70;Oficina;SP;Sao Paulo;Sao Paulo;3161;17/10/2021
+70;Casa Atacado 82;79.343.607/0001-16;Varejo Peca;SP;Sao Paulo;Sao Jose dos Campos;34868;18/03/2020
+71;Distribuidora Pecas 2;81.191.551/0001-96;Oficina;MG;Minas Gerais;Contagem;12097;01/04/2022
+72;Express Distribuidor 52;92.771.272/0001-69;Varejo Peca;SP;Sao Paulo;Campinas;22504;24/09/2022
+73;Centro Diesel 67;70.991.810/0001-29;Varejo Peca;SP;Sao Paulo;Sao Paulo;48506;10/06/2021
+74;Auto Comercio 12;73.744.528/0001-95;Oficina;SP;Sao Paulo;Sorocaba;24248;27/01/2020
+75;Sao Diesel 3;40.218.486/0001-41;Oficina;MG;Minas Gerais;Juiz de Fora;17306;18/07/2021
+76;Global Motors 40;11.129.450/0001-32;Varejo Peca;PR;Parana;Maringa;46819;05/09/2020
+77;Forte Motors 78;94.589.215/0001-18;Varejo Peca;PR;Parana;Curitiba;57634;15/07/2022
+78;Master Center 3;47.254.490/0001-91;Oficina;SP;Sao Paulo;Sorocaba;12775;22/03/2023
+79;Premium Distribuidor 57;59.380.549/0001-66;Oficina;RJ;Rio de Janeiro;Rio de Janeiro;20814;31/07/2021
+80;Top Center 41;23.727.661/0001-13;Varejo Peca;SP;Sao Paulo;Sao Jose dos Campos;50540;07/02/2022
+81;Forte Comercio 29;95.433.269/0001-22;Oficina;SP;Sao Paulo;Sao Jose dos Campos;22088;17/12/2021
+82;Rede Truck 79;79.651.487/0001-98;Varejo Peca;MG;Minas Gerais;Juiz de Fora;36552;09/10/2021
+83;Express Center 5;35.407.273/0001-65;Oficina;MG;Minas Gerais;Contagem;19169;19/07/2022
+84;Sao Pecas 79;14.918.710/0001-75;Varejo Peca;RJ;Rio de Janeiro;Nova Iguacu;23971;10/05/2021
+85;Santa Veiculos 69;75.392.920/0001-95;Oficina;PR;Parana;Londrina;22400;30/05/2020
+86;Express Truck 2;64.496.737/0001-56;Atacadista;MG;Minas Gerais;Juiz de Fora;155320;18/11/2021
+87;Bom Pecas 14;32.602.732/0001-60;Oficina;PR;Parana;Londrina;8195;06/08/2020
+88;Loja Distribuidor 4;22.219.322/0001-60;Oficina;MT;Mato Grosso;Cuiaba;14998;23/07/2022
+89;Royal Veiculos 13;51.418.103/0001-22;Varejo Peca;RJ;Rio de Janeiro;Duque de Caxias;29651;17/11/2022
+90;Brasil Comercio 13;34.995.916/0001-80;Oficina;BA;Bahia;Vitoria da Conquista;17160;11/07/2020
+91;Garagem Truck 20;22.663.914/0001-64;Oficina;MG;Minas Gerais;Uberlandia;12754;07/07/2022
+92;Royal Autopecas 57;67.586.459/0001-22;Oficina;SP;Sao Paulo;Sao Jose dos Campos;13953;26/12/2022
+93;Imports Atacado 68;23.458.272/0001-11;Varejo Peca;MG;Minas Gerais;Contagem;20900;15/06/2022
+94;Real Comercio 14;56.870.177/0001-62;Oficina;PR;Parana;Londrina;18287;14/10/2022
+95;Master Diesel 75;87.636.285/0001-77;Oficina;PR;Parana;Maringa;9837;24/11/2020
+96;Express Importadora 38;43.312.824/0001-85;Varejo Peca;SP;Sao Paulo;Sorocaba;29497;09/10/2020
+97;Imports Center 15;41.101.302/0001-86;Oficina;SP;Sao Paulo;Sorocaba;22189;10/05/2021
+98;Brasil Autopecas 85;92.534.726/0001-69;Frotista;SC;Santa Catarina;Blumenau;63737;20/02/2021
+99;Master Veiculos 58;82.486.466/0001-11;Frotista;RS;Rio Grande do Sul;Caxias do Sul;95966;02/04/2021
+100;Real Importadora 2;69.145.717/0001-12;Atacadista;MG;Minas Gerais;Juiz de Fora;140042;07/08/2021
+101;Prime Distribuidor 56;48.985.826/0001-42;Atacadista;PR;Parana;Maringa;115407;28/03/2023
+102;Casa Pecas 91;89.652.567/0001-23;Oficina;SP;Sao Paulo;Sao Paulo;11077;29/03/2020
+103;Prime Comercio 30;18.207.913/0001-19;Oficina;RJ;Rio de Janeiro;Rio de Janeiro;5564;27/01/2021
+104;Universal Pecas 97;46.518.479/0001-81;Concessionaria;SP;Sao Paulo;Ribeirao Preto;201788;10/10/2020
+105;Centro Center 82;78.268.721/0001-60;Oficina;SP;Sao Paulo;Sao Paulo;23475;23/12/2022
+106;Top Importadora 82;10.394.896/0001-22;Oficina;SP;Sao Paulo;Sorocaba;16991;12/07/2022
+107;King Atacado 80;51.263.881/0001-98;Concessionaria;MG;Minas Gerais;Juiz de Fora;71656;05/08/2021
+108;Rede Autopecas 47;19.978.110/0001-56;Oficina;SP;Sao Paulo;Sao Paulo;11600;24/09/2022
+109;Imports Autopecas 39;24.943.656/0001-19;Oficina;SP;Sao Paulo;Campinas;14859;26/12/2021
+110;Star Motors 22;80.358.799/0001-25;Atacadista;RJ;Rio de Janeiro;Duque de Caxias;87417;22/01/2021
+111;Loja Truck 98;56.585.166/0001-91;Oficina;SP;Sao Paulo;Sao Jose dos Campos;6916;28/06/2022
+112;Real Atacado 7;54.967.331/0001-45;Atacadista;RS;Rio Grande do Sul;Caxias do Sul;297269;04/08/2020
+113;Centro Center 59;23.312.414/0001-25;Frotista;RS;Rio Grande do Sul;Porto Alegre;71038;19/10/2021
+114;Mecanica Center 39;99.953.148/0001-18;Oficina;PA;Para;Ananindeua;5881;13/08/2021
+115;Brasil Truck 70;50.306.128/0001-90;Frotista;BA;Bahia;Salvador;21473;18/06/2021
+116;Premium Comercio 88;88.324.143/0001-55;Concessionaria;SP;Sao Paulo;Ribeirao Preto;110214;27/06/2020
+117;Mega Veiculos 84;56.306.654/0001-42;Varejo Peca;ES;Espirito Santo;Vila Velha;25797;20/02/2020
+118;Universal Autopecas 82;12.543.576/0001-97;Atacadista;RS;Rio Grande do Sul;Caxias do Sul;211919;15/12/2022
+119;Star Veiculos 61;92.982.464/0001-25;Oficina;RS;Rio Grande do Sul;Porto Alegre;11876;07/10/2021
+120;Loja Center 28;97.109.224/0001-14;Oficina;SP;Sao Paulo;Ribeirao Preto;;16/04/2020
+121;Real Veiculos 17;99.716.408/0001-32;Oficina;RJ;Rio de Janeiro;Niteroi;20920;10/07/2021
+122;Master Atacado 56;60.484.969/0001-57;Oficina;BA;Bahia;Feira de Santana;7420;16/01/2022
+123;Forte Importadora 34;40.849.926/0001-52;Varejo Peca;PR;Parana;Maringa;;01/03/2020
+124;Casa Autopecas 59;38.416.737/0001-62;Varejo Peca;SP;Sao Paulo;Campinas;17142;19/08/2020
+125;Star Center 89;15.382.953/0001-69;Concessionaria;PE;Pernambuco;Recife;59274;13/05/2021
+126;Royal Atacado 66;50.528.193/0001-25;Atacadista;SC;Santa Catarina;Florianopolis;157873;05/09/2021
+127;Centro Truck 42;50.331.371/0001-88;Varejo Peca;SP;Sao Paulo;Sao Paulo;50115;25/09/2021
+128;Global Center 62;76.868.835/0001-19;Frotista;SP;Sao Paulo;Santos;56197;02/03/2020
+129;Casa Comercio 12;61.873.672/0001-98;Oficina;SP;Sao Paulo;Santos;16599;17/03/2023
+130;Royal Pecas 92;50.749.234/0001-12;Oficina;SC;Santa Catarina;Florianopolis;3944;17/02/2023
+131;Prime Importadora 99;86.259.604/0001-35;Varejo Peca;RJ;Rio de Janeiro;Rio de Janeiro;10645;08/01/2022
+132;Mega Center 68;71.559.810/0001-77;Oficina;SP;Sao Paulo;Ribeirao Preto;24679;16/09/2022
+133;Royal Autopecas 40;55.185.182/0001-10;Frotista;CE;Ceara;Caucaia;72092;17/03/2022
+134;Mega Pecas 40;36.103.107/0001-49;Oficina;SP;Sao Paulo;Sorocaba;3123;25/04/2022
+135;Royal Comercio 64;54.282.933/0001-85;Concessionaria;MG;Minas Gerais;Contagem;60702;16/11/2021
+136;Centro Comercio 57;21.901.253/0001-87;Frotista;DF;Distrito Federal;Brasilia;25493;23/09/2020
+137;Nacional Motors 75;31.308.708/0001-75;Atacadista;RJ;Rio de Janeiro;Duque de Caxias;227665;14/11/2022
+138;Mega Motors 63;22.624.529/0001-25;Oficina;SC;Santa Catarina;Florianopolis;18054;09/03/2021
+139;Global Diesel 77;47.600.123/0001-95;Oficina;PR;Parana;Curitiba;5336;28/12/2020
+140;Universal Distribuidor 8;39.935.437/0001-22;Oficina;RJ;Rio de Janeiro;Duque de Caxias;12308;13/01/2021
+141;Premium Distribuidor 75;42.661.842/0001-21;Concessionaria;RJ;Rio de Janeiro;Niteroi;137406;23/06/2022
+142;Royal Veiculos 88;58.371.329/0001-62;Frotista;SP;Sao Paulo;Ribeirao Preto;111812;11/01/2021
+143;Sao Diesel 23;27.821.838/0001-49;Varejo Peca;GO;Goias;Goiania;8771;20/05/2022
+144;Centro Comercio 21;69.808.125/0001-97;Varejo Peca;RS;Rio Grande do Sul;Porto Alegre;35121;15/03/2021
+145;Brasil Autopecas 70;85.786.668/0001-67;Frotista;SP;Sao Paulo;Sao Paulo;148146;10/03/2023
+146;Diamond Atacado 7;39.336.867/0001-90;Oficina;SP;Sao Paulo;Santos;21051;12/06/2022
+147;Garagem Comercio 94;92.581.638/0001-27;Oficina;MG;Minas Gerais;Uberlandia;23807;16/08/2020
+148;Centro Autopecas 89;61.743.211/0001-32;Varejo Peca;MG;Minas Gerais;Belo Horizonte;52482;21/09/2022
+149;King Pecas 3;37.656.514/0001-98;Oficina;SP;Sao Paulo;Santos;6662;17/01/2021
+150;Distribuidora Motors 63;60.991.426/0001-51;Oficina;PR;Parana;Londrina;9504;22/01/2023
+151;Mega Pecas 56;72.172.842/0001-70;Oficina;SP;Sao Paulo;Sao Jose dos Campos;7261;04/11/2022
+152;Diamond Center 29;56.174.527/0001-53;Oficina;ES;Espirito Santo;Vitoria;8180;22/02/2020
+153;Auto Autopecas 42;23.496.178/0001-15;Concessionaria;MG;Minas Gerais;Contagem;93279;27/02/2022
+154;Garagem Pecas 21;30.101.476/0001-25;Oficina;DF;Distrito Federal;Brasilia;5393;11/10/2022
+155;Imports Autopecas 66;46.218.681/0001-12;Varejo Peca;SP;Sao Paulo;Campinas;59261;14/04/2020
+156;Rede Veiculos 9;57.918.235/0001-24;Concessionaria;SP;Sao Paulo;Campinas;213489;08/07/2022
+157;Real Atacado 86;36.600.912/0001-78;Varejo Peca;SP;Sao Paulo;Campinas;43986;24/08/2020
+158;Auto Distribuidor 40;46.963.496/0001-76;Oficina;RJ;Rio de Janeiro;Rio de Janeiro;23002;05/06/2021
+159;Forte Importadora 56;19.750.822/0001-30;Oficina;SP;Sao Paulo;Campinas;8917;02/07/2020
+160;Rede Comercio 6;69.190.329/0001-88;Varejo Peca;SP;Sao Paulo;Sao Jose dos Campos;22347;21/12/2021
+161;Mecanica Pecas 37;56.564.111/0001-83;Varejo Peca;MG;Minas Gerais;Belo Horizonte;37875;07/12/2020
+162;Distribuidora Truck 27;96.716.270/0001-59;Oficina;SP;Sao Paulo;;14195;14/03/2020
+163;Nacional Diesel 52;46.509.948/0001-86;Oficina;PE;Pernambuco;Olinda;9189;16/07/2021
+164;King Motors 4;79.350.939/0001-26;Frotista;GO;Goias;Goiania;60739;21/11/2020
+165;Rede Atacado 76;55.181.518/0001-48;Oficina;MG;Minas Gerais;Belo Horizonte;23754;09/03/2020
+166;Mega Veiculos 32;31.925.285/0001-14;Varejo Peca;SP;Sao Paulo;Sorocaba;37778;05/04/2020
+167;Distribuidora Diesel 64;10.126.897/0001-82;Varejo Peca;CE;Ceara;Caucaia;12599;06/05/2020
+168;Auto Pecas 23;26.271.976/0001-11;Oficina;PR;Parana;Londrina;19657;25/06/2020
+169;Real Comercio 79;89.633.367/0001-49;Varejo Peca;SP;Sao Paulo;Sao Paulo;15529;16/03/2022
+170;Rede Motors 36;37.164.967/0001-69;Oficina;MT;Mato Grosso;Cuiaba;21804;14/10/2020
+171;Casa Veiculos 27;99.585.550/0001-67;Oficina;SP;Sao Paulo;Ribeirao Preto;5486;12/05/2022
+172;Premium Truck 98;48.552.757/0001-87;Varejo Peca;SP;Sao Paulo;Sao Paulo;59729;14/01/2021
+173;Super Atacado 76;36.321.272/0001-19;Frotista;MG;Minas Gerais;Juiz de Fora;94811;15/07/2022
+174;Master Diesel 21;31.576.955/0001-21;Oficina;SC;Santa Catarina;Blumenau;24497;06/01/2022
+175;Global Center 96;21.480.780/0001-13;Oficina;RJ;Rio de Janeiro;Rio de Janeiro;23438;15/07/2022
+176;Nacional Motors 8;31.444.494/0001-51;Oficina;RS;Rio Grande do Sul;Pelotas;13800;20/06/2020
+177;Top Comercio 28;29.540.980/0001-14;Oficina;PR;Parana;Curitiba;9528;08/11/2020
+178;Star Autopecas 10;88.873.393/0001-62;Oficina;CE;Ceara;Caucaia;9442;25/01/2023
+179;Premium Veiculos 69;15.128.569/0001-90;Concessionaria;GO;Goias;Anapolis;99707;29/09/2021
+180;Peca Atacado 15;24.312.921/0001-40;Oficina;SC;Santa Catarina;Joinville;24382;21/11/2022
+181;Imports Veiculos 4;35.575.623/0001-19;Oficina;BA;Bahia;Feira de Santana;15193;22/05/2021
+182;Auto Autopecas 8;53.829.392/0001-43;Oficina;GO;Goias;Anapolis;5524;08/07/2021
+183;Garagem Importadora 45;41.733.747/0001-91;Oficina;MG;Minas Gerais;Juiz de Fora;19333;01/07/2022
+184;Garagem Center 74;14.974.742/0001-88;Varejo Peca;BA;Bahia;Salvador;52559;30/04/2022
+185;Express Diesel 95;84.718.439/0001-41;Varejo Peca;ES;Espirito Santo;;11074;28/10/2022
+186;Brasil Truck 28;92.679.875/0001-66;Oficina;BA;Bahia;Salvador;17138;28/01/2020
+187;Mecanica Center 19;48.371.836/0001-75;Oficina;SP;Sao Paulo;Sao Paulo;8910;09/03/2023
+188;Express Pecas 94;56.634.970/0001-55;Concessionaria;MG;Minas Gerais;Juiz de Fora;119490;18/10/2020
+189;Casa Atacado 35;65.177.633/0001-63;Atacadista;SC;Santa Catarina;Florianopolis;130787;17/01/2022
+190;Super Truck 48;56.123.520/0001-84;Oficina;SP;Sao Paulo;Sao Jose dos Campos;13886;22/08/2021
+191;Nacional Atacado 85;49.772.314/0001-41;Oficina;SP;Sao Paulo;Sao Jose dos Campos;5654;31/10/2022
+192;Distribuidora Pecas 63;67.554.495/0001-34;Frotista;RJ;Rio de Janeiro;Rio de Janeiro;55596;19/02/2020
+193;Super Atacado 2;99.378.176/0001-76;Varejo Peca;RJ;Rio de Janeiro;Nova Iguacu;24033;31/10/2020
+194;Brasil Center 6;64.729.749/0001-50;Varejo Peca;GO;Goias;Goiania;58942;16/11/2020
+195;Loja Diesel 88;56.382.847/0001-61;Concessionaria;ES;Espirito Santo;Vitoria;219683;18/08/2022
+196;Garagem Comercio 57;73.248.806/0001-45;Frotista;RJ;Rio de Janeiro;Nova Iguacu;89091;27/01/2021
+197;Centro Pecas 24;44.661.445/0001-26;Oficina;MG;Minas Gerais;;14001;21/05/2021
+198;Sao Distribuidor 81;88.923.792/0001-66;Atacadista;GO;Goias;Goiania;166464;02/04/2020
+199;Express Importadora 66;83.701.512/0001-95;Oficina;SP;Sao Paulo;Ribeirao Preto;8581;30/07/2022
+200;Royal Veiculos 45;53.521.539/0001-11;Varejo Peca;RJ;Rio de Janeiro;Nova Iguacu;24458;28/02/2021
