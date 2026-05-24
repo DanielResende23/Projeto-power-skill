@@ -1,0 +1,164 @@
+table fato_vendas_raw
+	lineageTag: 6aba3eca-c07a-4516-a615-0428068b8923
+
+	column id_venda
+		dataType: int64
+		formatString: 0
+		lineageTag: af176427-846a-42e8-9ac0-d8b9d1222e5e
+		summarizeBy: sum
+		sourceColumn: id_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: a4671ced-372a-4e7f-9f8a-2b6e62662280
+		summarizeBy: sum
+		sourceColumn: id_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_venda
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 46511b5e-c204-4184-8177-74004848fd6b
+		summarizeBy: none
+		sourceColumn: data_venda
+
+		variation Variation
+			isDefault
+			relationship: 0947140c-a5e3-49c2-ab82-127d8cd29835
+			defaultHierarchy: LocalDateTable_0b226f98-87e7-4f67-bf9d-b45e314290a4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 349c19fc-f640-4200-bd75-bbb5ee77640f
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produto
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ce18891-7450-47b0-ac28-f02d6309cbd8
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade
+		dataType: int64
+		formatString: 0
+		lineageTag: b6dd10fe-29c1-492b-9a9d-35525a9fc418
+		summarizeBy: sum
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco_tabela_brl
+		dataType: double
+		lineageTag: f3e7f9c3-a8b1-4cc2-836c-c6b95acdc76f
+		summarizeBy: sum
+		sourceColumn: preco_tabela_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column desconto_pct
+		dataType: double
+		lineageTag: 2aaa93a8-3d04-45ca-b21e-84afbc80d1d1
+		summarizeBy: sum
+		sourceColumn: desconto_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column preco_unitario_brl
+		dataType: double
+		lineageTag: ec9efc01-c04f-4226-a509-1c4ae7ba3d2e
+		summarizeBy: sum
+		sourceColumn: preco_unitario_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_bruto_brl
+		dataType: double
+		lineageTag: d1c8389c-e994-4426-9537-a3134bf9486c
+		summarizeBy: sum
+		sourceColumn: valor_bruto_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_desconto_brl
+		dataType: double
+		lineageTag: ba4a5ce0-9565-4bfb-b8d8-ab500dda0dc6
+		summarizeBy: sum
+		sourceColumn: valor_desconto_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_liquido_brl
+		dataType: double
+		lineageTag: 897edc9e-7afb-44ce-a775-72adf77f3790
+		summarizeBy: sum
+		sourceColumn: valor_liquido_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custo_total_brl
+		dataType: double
+		lineageTag: 1e6b1903-919b-4713-be8b-8df51da2bfae
+		summarizeBy: sum
+		sourceColumn: custo_total_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column canal_venda
+		dataType: string
+		lineageTag: 66b22bfe-eac9-49c5-b785-7220e1001aee
+		summarizeBy: none
+		sourceColumn: canal_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column forma_pagamento
+		dataType: string
+		lineageTag: 8844ccbc-9f10-42bd-94be-92195c9d49a9
+		summarizeBy: none
+		sourceColumn: forma_pagamento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_vendas_raw = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\dansi\Desktop\Material\raw\fato_vendas_raw.csv"),[Delimiter=";", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id_venda", Int64.Type}, {"id_pedido", Int64.Type}, {"data_venda", type date}, {"id_cliente", Int64.Type}, {"id_produto", Int64.Type}, {"quantidade", Int64.Type}, {"preco_tabela_brl", type number}, {"desconto_pct", type number}, {"preco_unitario_brl", type number}, {"valor_bruto_brl", type number}, {"valor_desconto_brl", type number}, {"valor_liquido_brl", type number}, {"custo_total_brl", type number}, {"canal_venda", type text}, {"forma_pagamento", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
