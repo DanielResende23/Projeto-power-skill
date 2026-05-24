@@ -1,0 +1,11 @@
+expression raw =
+		let
+		  Origem = Folder.Files("C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw")
+		in
+		  Origem
+	lineageTag: 0fecc830-7c78-4957-a513-c1e701d50bb9
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

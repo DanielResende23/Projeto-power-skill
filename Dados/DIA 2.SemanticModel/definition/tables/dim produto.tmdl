@@ -1,0 +1,98 @@
+table 'dim produto'
+	lineageTag: d49f007d-07c7-4f8a-a562-44769b743c4a
+
+	column id_produto
+		dataType: string
+		lineageTag: 341840e1-5628-400a-a3b2-74fa55ae4dd5
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 7a2a3d65-b59f-4265-ad31-6033a4eed6b1
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column descricao
+		dataType: string
+		lineageTag: 0fa44f2e-f347-4857-8751-798660fe5069
+		summarizeBy: none
+		sourceColumn: descricao
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: 6796080e-9a98-4c84-a05c-38409e71f66c
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column veiculo_aplicacao
+		dataType: string
+		lineageTag: c5d957aa-3ed9-4aed-b70e-f91b94aadcd4
+		summarizeBy: none
+		sourceColumn: veiculo_aplicacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column peso_kg
+		dataType: double
+		lineageTag: 55dc3eac-78dd-46f7-98c8-44c3d37d4b92
+		summarizeBy: none
+		sourceColumn: peso_kg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custo_unit_usd
+		dataType: double
+		lineageTag: c6472a41-cbc1-477a-bde7-8b6d79a471a9
+		summarizeBy: none
+		sourceColumn: custo_unit_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column preco_unit_brl
+		dataType: double
+		lineageTag: cac6824c-d9d5-41cf-8f71-af7f137b6c5c
+		summarizeBy: none
+		sourceColumn: preco_unit_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column qtd_por_embalagem
+		dataType: int64
+		formatString: 0
+		lineageTag: b080ee3b-150d-4fe0-b0b2-8dc13cfe9e02
+		summarizeBy: none
+		sourceColumn: qtd_por_embalagem
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dim produto' = m
+		mode: import
+		source =
+				let
+				    Source = raw,
+				    #"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_dim_produto_raw csv" = Source{[#"Folder Path"="C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\",Name="dim_produto_raw.csv"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_dim_produto_raw csv",[Delimiter=";", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"peso_kg", type number}, {"custo_unit_usd", type number}, {"preco_unit_brl", type number}, {"qtd_por_embalagem", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

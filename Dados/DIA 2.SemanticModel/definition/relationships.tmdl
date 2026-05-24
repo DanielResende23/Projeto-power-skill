@@ -1,0 +1,8 @@
+relationship AutoDetected_1f699079-6af8-4d8a-8d4f-1d7dface7d05
+	fromColumn: 'fact vendas'.id_produto
+	toColumn: 'dim produto'.id_produto
+
+relationship f5b50cda-3605-b815-fcf5-28081356a4d5
+	fromColumn: 'fact vendas'.id_cliente
+	toColumn: 'dim cliente'.id_cliente
+

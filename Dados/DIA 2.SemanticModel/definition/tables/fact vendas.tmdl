@@ -1,0 +1,189 @@
+table 'fact vendas'
+	lineageTag: ad3d64ab-a3f3-4fce-a123-0f916a1d2837
+
+	column id_venda
+		dataType: string
+		lineageTag: 6f8d1472-76be-4129-ac43-cfea767ca1bc
+		summarizeBy: none
+		sourceColumn: id_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_pedido
+		dataType: string
+		lineageTag: 479328dc-c5ba-431a-b39e-0e1834fc31db
+		summarizeBy: none
+		sourceColumn: id_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_venda
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 04928045-60a3-4998-bd6f-1c31e78bc9db
+		summarizeBy: none
+		sourceColumn: data_venda
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_cliente
+		dataType: string
+		lineageTag: 925bb317-6206-40e2-b38c-6b13638e2364
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produto
+		dataType: string
+		lineageTag: 399a00c2-31bc-4055-9a1f-083221ce8db0
+		summarizeBy: none
+		sourceColumn: id_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade
+		dataType: string
+		lineageTag: a1a50834-4ecd-4657-a80e-43be1071d8c2
+		summarizeBy: none
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco_tabela_brl
+		dataType: string
+		lineageTag: b9fcb9d3-6348-46dd-9582-cde7157fbaaa
+		summarizeBy: none
+		sourceColumn: preco_tabela_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column desconto_pct
+		dataType: string
+		lineageTag: afd8b74e-0e90-48d6-a730-65ea68690151
+		summarizeBy: none
+		sourceColumn: desconto_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco_unitario_brl
+		dataType: string
+		lineageTag: 4ff64573-c648-4d9c-ad3d-d7695a5b70e3
+		summarizeBy: none
+		sourceColumn: preco_unitario_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_bruto_brl
+		dataType: string
+		lineageTag: 966ab6c5-e0b3-4d11-a970-a60e7ffd599c
+		summarizeBy: none
+		sourceColumn: valor_bruto_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_desconto_brl
+		dataType: string
+		lineageTag: aadcf1a7-9685-4ca8-aec4-a79b68b9c6c0
+		summarizeBy: none
+		sourceColumn: valor_desconto_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_liquido_brl
+		dataType: string
+		lineageTag: e807e0cf-9bcb-49a8-ad0d-ad0889aba30c
+		summarizeBy: none
+		sourceColumn: valor_liquido_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_total_brl
+		dataType: string
+		lineageTag: 59b2be43-2ac9-42ed-a60d-de3c282f93af
+		summarizeBy: none
+		sourceColumn: custo_total_brl
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal_venda
+		dataType: string
+		lineageTag: aa1fe852-0262-4cdc-b381-bc2fabf492cb
+		summarizeBy: none
+		sourceColumn: canal_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column forma_pagamento
+		dataType: string
+		lineageTag: 8b30439e-f877-42ef-8f6f-0cf2114599a3
+		summarizeBy: none
+		sourceColumn: forma_pagamento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fact vendas' = m
+		mode: import
+		source =
+				let
+				    Source = raw,
+				    #"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_fato_vendas_raw csv" = Source{[#"Folder Path"="C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\",Name="fato_vendas_raw.csv"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_fato_vendas_raw csv",[Delimiter=";", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Normalized data_venda" = Table.TransformColumns(
+				        #"Promoted Headers",
+				        {{"data_venda", each
+				            let
+				                val = Text.Trim(_)
+				            in
+				                if val = null or val = "" then
+				                    null
+				                else if Text.Length(val) = 10 and Text.At(val, 4) = "-" then
+				                    let
+				                        dd = Number.FromText(Text.Middle(val, 8, 2)),
+				                        mm = Number.FromText(Text.Middle(val, 5, 2)),
+				                        aaaa = Number.FromText(Text.Start(val, 4))
+				                    in
+				                        try Text.PadStart(Text.From(dd), 2, "0") & "/" & Text.PadStart(Text.From(mm), 2, "0") & "/" & Text.From(aaaa) otherwise null
+				                else
+				                    val,
+				            type text
+				        }}
+				    ),
+				    #"Changed Types" = Table.TransformColumnTypes(
+				        #"Normalized data_venda",
+				        {
+				            {"id_venda", type text},
+				            {"id_pedido", type text},
+				            {"data_venda", type date},
+				            {"id_cliente", type text},
+				            {"id_produto", type text},
+				            {"quantidade", Int64.Type},
+				            {"preco_tabela_brl", type number},
+				            {"desconto_pct", type number},
+				            {"preco_unitario_brl", type number},
+				            {"valor_bruto_brl", type number},
+				            {"valor_desconto_brl", type number},
+				            {"valor_liquido_brl", type number},
+				            {"custo_total_brl", type number},
+				            {"canal_venda", type text},
+				            {"forma_pagamento", type text}
+				        },
+				        "pt-BR"
+				    ),
+				    #"Replaced blank forma_pagamento" = Table.TransformColumns(
+				        #"Changed Types",
+				        {{"forma_pagamento", each
+				            if _ = null or Text.Trim(_) = "" then "Não Informado" else _,
+				            type text
+				        }}
+				    )
+				in
+				    #"Replaced blank forma_pagamento"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

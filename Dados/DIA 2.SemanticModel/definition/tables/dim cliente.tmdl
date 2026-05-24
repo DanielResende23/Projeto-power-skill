@@ -1,0 +1,93 @@
+table 'dim cliente'
+	lineageTag: 80d37637-b6fd-4b50-94fe-025e4ab77317
+
+	column id_cliente
+		dataType: string
+		lineageTag: ead2417a-5c47-4b9f-ac22-dd8b0d48467f
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_cliente
+		dataType: string
+		lineageTag: 186e2ae7-aacf-4363-bdf6-ba9831d179c6
+		summarizeBy: none
+		sourceColumn: nome_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column cnpj
+		dataType: string
+		lineageTag: 6447e4a8-3a02-4193-a23a-d57673acc580
+		summarizeBy: none
+		sourceColumn: cnpj
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_cliente
+		dataType: string
+		lineageTag: e2915fad-824a-416f-b2ac-9b140deb8d91
+		summarizeBy: none
+		sourceColumn: tipo_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		lineageTag: 0b4055b2-17ab-4248-9c82-956930cac03b
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_nome
+		dataType: string
+		lineageTag: 7a72ff85-7f00-4cf5-a7f0-2bc7037976da
+		summarizeBy: none
+		sourceColumn: uf_nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column cidade
+		dataType: string
+		lineageTag: 5cda22db-3cb7-42f5-90b9-d86cf3d14a41
+		summarizeBy: none
+		sourceColumn: cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_credito_brl
+		dataType: double
+		lineageTag: 26e825ae-fcd8-44c4-9bd7-fe42089d24ae
+		summarizeBy: none
+		sourceColumn: limite_credito_brl
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data_cadastro
+		dataType: string
+		lineageTag: b6e76eed-628a-4839-b1db-59373c76e6d2
+		summarizeBy: none
+		sourceColumn: data_cadastro
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dim cliente' = m
+		mode: import
+		source =
+				let
+				    Source = raw,
+				    #"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_dim_cliente_raw csv" = Source{[#"Folder Path"="C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\",Name="dim_cliente_raw.csv"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"C:\Users\ecsilva\OneDrive - GDM Seeds\Capacitação Power Skills\raw\_dim_cliente_raw csv",[Delimiter=";", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"limite_credito_brl", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
